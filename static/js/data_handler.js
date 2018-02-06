@@ -4,6 +4,31 @@
 // (watch out: when you would like to use a property/function of an object from the
 // object itself then you must use the 'this' keyword before. For example: 'this._data' below)
 DataHandler = {
+    Constants: {
+        DEFAULT_DATA: SampleData = {
+            "statuses": [
+                {
+                    "id": 1,
+                    "name": "New"
+                },
+                {
+                    "id": 2,
+                    "name": "In progress"
+                },
+                {
+                    "id": 3,
+                    "name": "Testing"
+                },
+                {
+                    "id": 4,
+                    "name": "Done"
+                }
+            ],
+            "boards": [],
+            "cards": []
+        }
+    },
+
     keyInLocalStorage: 'proman-data', // the string that you use as a key in localStorage to save your application data
     _data: {}, // it contains the boards and their cards and statuses. It is not called from outside.
 
