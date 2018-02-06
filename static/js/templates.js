@@ -8,25 +8,28 @@ Templates = {
     },
 
     cardTemplate: function (card) {
-        let generatedCard = `<div class="card card-default" style="margin: 20px" align="center">
+        let generatedCard;
+        generatedCard = `
+                    <div class="card card-default" style="margin: 20px" align="center">
                         <div class="card-body" id="${this.Constants.HTMLPrefixes.CARD_ID}${card.id}">${card.title}</div>
                     </div>`;
         return generatedCard;
     },
 
     columnTemplate: function (status) {
-
-        let generatedColumn = `<div class="card">
+        let generatedColumn;
+        generatedColumn = `
+                        <div class="card">
                             <div class="card-block" id="${this.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}">
-                                    <h4 class="card-header">${status.name}</h4>
-                             </div>
-                      </div>`;
+                                <h4 class="card-header">${status.name}</h4>
+                            </div>
+                        </div>`;
         return generatedColumn;
     },
 
     boardTemplate: function (board) {
-
-        let generatedBoard = `
+        let generatedBoard;
+        generatedBoard = `
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
