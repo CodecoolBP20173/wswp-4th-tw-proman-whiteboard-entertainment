@@ -7,6 +7,11 @@ DOM = {
             BOARD_ID: 'board_',
             STATUS_COLUMN_ID: 'status_column_',
             CARD_ID: 'card_'
+        },
+
+        CreateBoardIDs: {
+            INPUT_ID: 'create-board-input',
+            BUTTON_ID: 'create-board-button'
         }
     },
 
@@ -24,6 +29,9 @@ DOM = {
 
 
     showBoards: function(boards) {
+        let boardHTML = Templates.boardTemplate(boards);
+        let container = document.getElementById('accordion');
+        container.innerHTML = container.innerHTML + boardHTML;
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
         // iterate through boards from local storage and add them to the html code with showBoard function
