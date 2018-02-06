@@ -1,8 +1,4 @@
 Templates = {
-    BoardTemplate: function (boardTitle) {
-        let board = `<title>${boardTitle}</title>`;
-        return board;
-    },
 
     cardTemplate: function (cardTitle) {
         let card = `<div class="card card-default" style="margin: 20px" align="center">
