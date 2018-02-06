@@ -1,7 +1,13 @@
 // This function is to initialize the application
 function init() {
     DataHandler.init();
-    (DataHandler._data.boards) ? DOM.showBoards() : null;
+    let boards = DataHandler._data.boards;
+    if (boards !== undefined && boards.length > 0) {
+        for (let i = 0; i < boards.length; i++)
+        {
+            DOM.showBoards(boards[i]);
+        }
+    }
     let newBoardButton = document.getElementById(DOM.Constants.CreateBoardIDs.BUTTON_ID);
     newBoardButton.addEventListener('click', function() {
         let title = document.getElementById(DOM.Constants.CreateBoardIDs.INPUT_ID).value;

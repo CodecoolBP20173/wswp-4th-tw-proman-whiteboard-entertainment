@@ -38,6 +38,7 @@ DataHandler = {
         // loads data from local storage, parses it and put into this._data property
         this._data = JSON.parse(localStorage[this.keyInLocalStorage]);
 
+        /*
         let BreakException = {};
         let that = this;
         try {
@@ -47,8 +48,8 @@ DataHandler = {
                 }
             });
         } catch (exception) {
-            this._data = Object.assing({}, this.Constants.DEFAULT_DATA);
-        }
+            this._data = Object.assign({}, this.Constants.DEFAULT_DATA);
+        } */
     },
 
 
