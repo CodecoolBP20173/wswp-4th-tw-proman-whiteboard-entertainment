@@ -31,14 +31,14 @@ Templates = {
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      ${boardName}
+                      ${board.title}
                     </button>
                     </h5>
                 </div>
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body1" id="${this.Constants.HTMLPrefixes.BOARD_ID}${board.title}">
+                    <div class="card-body1" >
                         <!-- card group -->
-                        <div class="card-group" id="${boardID}-columns">
+                        <div class="card-group" id="${this.Constants.HTMLPrefixes.BOARD_ID}${board.id}">
                         
                         </div>
                         <!-- end of card group -->
