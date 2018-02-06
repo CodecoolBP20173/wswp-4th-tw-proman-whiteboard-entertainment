@@ -76,6 +76,7 @@ DataHandler = {
 
     getStatuses: function() {
         // the statuses are retrieved and then the callback function is called with the statuses
+        return this._data.statuses;
     },
 
 
@@ -84,7 +85,7 @@ DataHandler = {
     },
 
 
-    getCardsByBoardId: function(boardId, callback) {
+    getCardsByBoardId: function(boardId) {
         // the cards are retrieved and then the callback function is called with the cards
         // get all of the card details connected to the specified board
         // get statuses
@@ -95,6 +96,22 @@ DataHandler = {
                 ...
             }
         */
+        let cardsForStatuses = {};
+        let all_cards = this._data.cards;
+        let statuses = this.getStatuses();
+
+        for (let i = 0; i < statuses.length; i++) {
+            let key = statuses[i].id;
+            cardsForStatuses[key] = [];
+        }
+
+        for (let i = 0; i < all_cards.length; i++) {
+            if (all_cards[i].board_id === boardId) {
+                cardsForStatuses[all_cards[i].status_id].push(all_cards[i]);
+            }
+        }
+
+        return cardsForStatuses;
     },
 
 

@@ -17,9 +17,39 @@ DOM = {
 
 
     showBoards: function(boards) {
+        let cardsByBoard = DataHandler.getCardsByBoardId(boards.id);
+        let statuses = DataHandler.getStatuses();
         let boardHTML = Templates.boardTemplate(boards);
         let container = document.getElementById('accordion');
         container.innerHTML = container.innerHTML + boardHTML;
+        let columnContainer = document.getElementById(DOM.Constants.HTMLPrefixes.BOARD_ID + boards.id);
+
+        for (let i = 0; i < statuses.length; i++) {
+            let cardsHTML = ``;
+            let columnHTML = Templates.columnTemplate(statuses[i]);
+            columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
+            let cardContainer = document.getElementById(DOM.Constants.HTMLPrefixes.STATUS_COLUMN_ID + statuses[i].id);
+
+            if (cardsByBoard !== undefined) {
+                let cardsForCurrentStatus = cardsByBoard[statuses[i].id];
+
+                for (let j = 0; j < cardsForCurrentStatus.length; j++) {
+                    let currentCard = cardsForCurrentStatus[j];
+                    cardsHTML += Templates.cardTemplate(currentCard);
+                }
+
+                cardContainer.innerHTML = cardContainer.innerHTML + cardsHTML;
+            }
+        }
+
+        // TODO: close all the boards
+        // TODO: open this board
+        /*
+            By default the freshly generated boards are open (if you create more, then all of them) because that's
+            how the templates are made.
+            We either close all the boards and open this board OR make the template to be created as collapsed....
+         */
+
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
         // iterate through boards from local storage and add them to the html code with showBoard function
