@@ -67,7 +67,7 @@ DataHandler = {
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
         // callback is the showBoard from the dom module
-        let newID = (this._data.cards)? this._data.cards.length + 1 : 1;
+        let newID = (this._data.boards)? this._data.boards.length + 1 : 1;
         let board = {
             "id": newID,
             "title": boardTitle,
