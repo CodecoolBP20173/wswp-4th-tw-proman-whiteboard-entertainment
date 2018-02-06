@@ -16,18 +16,6 @@ DOM = {
     },
 
 
-    // returns rendered html codes:
-    Template: {
-        generateBoard: function(board_details) {
-
-        },
-
-        generateCard: function(card_details) {
-
-        }
-    },
-
-
     showBoards: function(boards) {
         let boardHTML = Templates.boardTemplate(boards);
         let container = document.getElementById('accordion');
