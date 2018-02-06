@@ -31,14 +31,14 @@ Templates = {
         let generatedBoard;
         generatedBoard = `
             <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="heading${board.id}">
                     <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
                       ${board.title}
                     </button>
                     </h5>
                 </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="collapse${board.id}" class="collapse show" aria-labelledby="heading${board.id}" data-parent="#accordion">
                     <div class="card-body1" >
                         <!-- card group -->
                         <div class="card-group" id="${this.Constants.HTMLPrefixes.BOARD_ID}${board.id}">
