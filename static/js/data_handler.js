@@ -11,12 +11,14 @@ DataHandler = {
     _loadData: function() {
         // it is not called from outside
         // loads data from local storage, parses it and put into this._data property
+        this._data = JSON.parse(localStorage[this.keyInLocalStorage]);
     },
 
 
     _saveData: function() {
         // it is not called from outside
         // saves the data from this._data to local storage
+        localStorage[this.keyInLocalStorage] = JSON.parse(this._data);
     },
 
 
