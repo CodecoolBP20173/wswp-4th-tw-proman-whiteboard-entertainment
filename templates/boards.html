@@ -11,6 +11,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
@@ -19,13 +20,24 @@
     </head>
     <body>
     <div class="main">
-        <div class="header" style="display: inline-block">
-        <h1 style="display: inline-block">ProMan</h1>
-        <button class="btn btn-success" style="display: inline-block; vertical-align: top; height: 60px">New Board</button>
-        </div>
+
+                <!-- Image and text -->
+        <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand" href="#">
+              <div>
+                  <h1 style="vertical-align: bottom; display: inline-block">ProMan</h1>
+                                    <img src="https://static.ezgif.com/images/bg-transparent.gif" width="60" height="60"  alt="" style="vertical-align: top; display: inline-block" >
+
+              </div>
+          </a>
+        </nav>
+
+
 
         <!-- bootstrap accordion -->
-        <div id="accordion">
+        <div id="accordion" style="margin-top:30px">
+
+            <!-- first board -->
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
@@ -34,7 +46,6 @@
                     </button>
                     </h5>
                 </div>
-
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body1">
 
@@ -78,7 +89,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- end of first board -->
 
 
             <div class="card">

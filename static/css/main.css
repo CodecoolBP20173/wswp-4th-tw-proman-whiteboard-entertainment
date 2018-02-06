@@ -2,7 +2,14 @@
     background-color: green;
 }
 
+body {
+    background: #add7f0;
+}
 .main {
     width: 80%;
     margin: 0 auto;
+    font-family: 'Raleway', sans-serif;
 }
+ h1, h4 {
+     color: /*#1b1f3b;*/ #cfdee7;
+ }
