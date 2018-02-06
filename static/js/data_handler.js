@@ -5,7 +5,7 @@
 // object itself then you must use the 'this' keyword before. For example: 'this._data' below)
 DataHandler = {
     Constants: {
-        DEFAULT_DATA: SampleData = {
+        DEFAULT_DATA: {
             "statuses": [
                 {
                     "id": 1,
@@ -37,6 +37,18 @@ DataHandler = {
         // it is not called from outside
         // loads data from local storage, parses it and put into this._data property
         this._data = JSON.parse(localStorage[this.keyInLocalStorage]);
+
+        let BreakException = {};
+        let that = this;
+        try {
+            this.Constants.DEFAULT_DATA.keys().forEach(function (currentKey) {
+                if (!that._data.contains(currentKey)) {
+                    throw BreakException;
+                }
+            });
+        } catch (exception) {
+            this._data = Object.assing({}, this.Constants.DEFAULT_DATA);
+        }
     },
 
 
