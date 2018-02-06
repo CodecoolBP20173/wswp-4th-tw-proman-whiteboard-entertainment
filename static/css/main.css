@@ -3,7 +3,7 @@
 }
 
 body {
-    background: #add7f0;
+    background: #efefef;
 }
 .main {
     width: 80%;
@@ -11,5 +11,5 @@ body {
     font-family: 'Raleway', sans-serif;
 }
  h1, h4 {
-     color: /*#1b1f3b;*/ #cfdee7;
+     color: /*#1b1f3b;*/ #688cc4;
  }
