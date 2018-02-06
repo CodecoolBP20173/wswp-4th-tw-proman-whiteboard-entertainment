@@ -12,6 +12,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
@@ -22,15 +24,15 @@
     <div class="main">
 
                 <!-- Image and text -->
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" style="height: 60px">
           <a class="navbar-brand" href="#">
               <div>
-                  <h1 style="vertical-align: bottom; display: inline-block">ProMan</h1>
                   <img src="https://static.ezgif.com/images/bg-transparent.gif" width="60" height="60"  alt="" style="vertical-align: top; display: inline-block" >
-                  <!-- Button trigger modal -->
+                  <h1 style="vertical-align: bottom; display: inline-block">ProMan</h1>
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display: inline-block">
                       Add new board
                   </button>
+
               </div>
           </a>
         </nav>
@@ -60,6 +62,9 @@
                                 <div class="card-block">
                                     <h4 class="card-header">New</h4>
                                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="panel panel-default" style="margin: 20px", align="center">
+                                        <div class="panel-body">A Basic Panel</div>
+                                    </div>
                                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                 </div>
                             </div>
@@ -68,6 +73,9 @@
                                 <div class="card-block">
                                     <h4 class="card-header">In progress</h4>
                                     <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                    <div class="panel panel-default" style="margin: 20px", align="center">
+                                        <div class="panel-body">A Basic Panel</div>
+                                    </div>
                                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                 </div>
                             </div>
@@ -76,6 +84,9 @@
                                 <div class="card-block">
                                     <h4 class="card-header">Testing</h4>
                                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                    <div class="panel panel-default" style="margin: 20px", align="center">
+                                        <div class="panel-body">A Basic Panel</div>
+                                    </div>
                                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                 </div>
                             </div>
@@ -84,6 +95,9 @@
                                 <div class="card-block">
                                     <h4 class="card-header">Done</h4>
                                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                    <div class="panel panel-default" style="margin: 20px", align="center">
+                                        <div class="panel-body">A Basic Panel</div>
+                                    </div>
                                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                 </div>
                             </div>
