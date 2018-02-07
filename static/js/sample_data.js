@@ -3,7 +3,7 @@
 
 var keyInLocalStorage = 'proman-data';
 
-SampleData = {
+sampleData = {
     "statuses": [
         {
             "id": 1,

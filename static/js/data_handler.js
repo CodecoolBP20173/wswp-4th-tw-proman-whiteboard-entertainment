@@ -38,18 +38,26 @@ DataHandler = {
         // loads data from local storage, parses it and put into this._data property
         this._data = JSON.parse(localStorage[this.keyInLocalStorage]);
 
-        /*
         let BreakException = {};
         let that = this;
         try {
-            this.Constants.DEFAULT_DATA.keys().forEach(function (currentKey) {
-                if (!that._data.contains(currentKey)) {
+            Object.keys(this.Constants.DEFAULT_DATA).forEach(function (currentKey) {
+                if (!that._data.hasOwnProperty(currentKey)) {
                     throw BreakException;
                 }
             });
+
+
+            // let objectKeys = Object.keys(this.Constants.DEFAULT_DATA);
+            // for(let i = 0; i < objectKeys.length; i++){
+            //     let currentKey = objectKeys[i];
+            //     if (!that._data.contains(currentKey)) {
+            //         throw BreakException;
+            //     }
+            // }
         } catch (exception) {
             this._data = Object.assign({}, this.Constants.DEFAULT_DATA);
-        } */
+        }
     },
 
 
@@ -147,4 +155,3 @@ DataHandler = {
 
     // here comes more features
 };
-
