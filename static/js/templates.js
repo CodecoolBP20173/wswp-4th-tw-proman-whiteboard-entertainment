@@ -40,7 +40,12 @@ Templates = {
                       ${board.title}
                     </button>
                     </h5>
+                    <div class="card_options" id="heading${board.id}-options"></div>
+                    
                 </div>
+                
+                
+                
                 <div id="collapse${board.id}" class="collapse" aria-labelledby="heading${board.id}" data-parent="#accordion">
                     <div class="card-body1" >
                         <!-- card group -->
