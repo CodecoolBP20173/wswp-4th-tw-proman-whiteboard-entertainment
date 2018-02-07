@@ -26,37 +26,62 @@ DataHandler = {
             ],
             "boards": [],
             "cards": []
-        }
+        },
+        KEY_IN_LOCAL_STORAGE: 'proman-data' // the string that you use as a key in localStorage to save your application data
     },
 
-    keyInLocalStorage: 'proman-data', // the string that you use as a key in localStorage to save your application data
     _data: {}, // it contains the boards and their cards and statuses. It is not called from outside.
 
+    _loadDefaultData: function() {
+        this._data = Object.assign({}, this.Constants.DEFAULT_DATA);
+
+        // save the default values to local storage:
+        this._saveData();
+    },
 
     _loadData: function() {
         // it is not called from outside
         // loads data from local storage, parses it and put into this._data property
-        this._data = JSON.parse(localStorage[this.keyInLocalStorage]);
+        if (this.Constants.KEY_IN_LOCAL_STORAGE in localStorage) {
+            this._data = JSON.parse(localStorage[this.Constants.KEY_IN_LOCAL_STORAGE]);
 
-        /*
-        let BreakException = {};
-        let that = this;
-        try {
-            this.Constants.DEFAULT_DATA.keys().forEach(function (currentKey) {
-                if (!that._data.contains(currentKey)) {
-                    throw BreakException;
+            let BreakException = {};
+            let that = this;
+            try {
+                Object.keys(this.Constants.DEFAULT_DATA).forEach(function (currentKey) {
+                    if (!that._data.hasOwnProperty(currentKey)) {
+                        throw BreakException;
+                    }
+                });
+
+
+                // let objectKeys = Object.keys(this.Constants.DEFAULT_DATA);
+                // for(let i = 0; i < objectKeys.length; i++){
+                //     let currentKey = objectKeys[i];
+                //     if (!that._data.contains(currentKey)) {
+                //         throw BreakException;
+                //     }
+                // }
+            } catch (exception) {
+                if (exception === BreakException) {
+                    this._loadDefaultData();
                 }
-            });
-        } catch (exception) {
-            this._data = Object.assign({}, this.Constants.DEFAULT_DATA);
-        } */
+                else {
+                    throw exception;
+                }
+            }
+        }
+        else {
+            this._loadDefaultData();
+        }
     },
 
 
     _saveData: function() {
         // it is not called from outside
         // saves the data from this._data to local storage
-        localStorage[this.keyInLocalStorage] = JSON.parse(this._data);
+        localStorage[this.Constants.KEY_IN_LOCAL_STORAGE] = JSON.stringify(this._data);
+
     },
 
 
@@ -130,11 +155,8 @@ DataHandler = {
             "title": boardTitle,
             "is_active": true,
         };
-        if ('boards' in this._data) {
-            this._data.boards.push(board);
-        } else {
-            this._data['boards'] = [board] ;
-        }
+        this._data.boards.push(board);
+        this._saveData();
 
         callback(board);
     },

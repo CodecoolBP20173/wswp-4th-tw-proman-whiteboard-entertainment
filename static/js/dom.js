@@ -16,7 +16,7 @@ DOM = {
     },
 
 
-    showBoards: function(boards) {
+    showBoard: function(boards) {
         let cardsByBoard = DataHandler.getCardsByBoardId(boards.id);
         let statuses = DataHandler.getStatuses();
         let boardHTML = Templates.boardTemplate(boards);
