@@ -81,7 +81,7 @@ DataHandler = {
         // it is not called from outside
         // saves the data from this._data to local storage
         localStorage[this.Constants.KEY_IN_LOCAL_STORAGE] = JSON.stringify(this._data);
-        
+
     },
 
 
@@ -169,3 +169,4 @@ DataHandler = {
 
     // here comes more features
 };
+
