@@ -26,9 +26,9 @@ DOM = {
 
         for (let i = 0; i < statuses.length; i++) {
             let cardsHTML = ``;
-            let columnHTML = Templates.columnTemplate(statuses[i]);
+            let columnHTML = Templates.columnTemplate(statuses[i], boards.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
-            let cardContainer = document.getElementById(DOM.Constants.HTMLPrefixes.STATUS_COLUMN_ID + statuses[i].id);
+            let cardContainer = document.getElementById(boards.id + "-" + DOM.Constants.HTMLPrefixes.STATUS_COLUMN_ID + statuses[i].id);
 
             if (cardsByBoard !== undefined) {
                 let cardsForCurrentStatus = cardsByBoard[statuses[i].id];

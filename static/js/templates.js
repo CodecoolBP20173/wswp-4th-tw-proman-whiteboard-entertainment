@@ -16,11 +16,11 @@ Templates = {
         return generatedCard;
     },
 
-    columnTemplate: function (status) {
+    columnTemplate: function (status, boardID) {
         let generatedColumn;
         generatedColumn = `
                         <div class="card">
-                            <div class="card-block" id="${this.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}">
+                            <div class="card-block" id="${boardID}-${this.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}">
                                 <h4 class="card-header">${status.name}</h4>
                             </div>
                         </div>`;
