@@ -22,7 +22,6 @@ DOM = {
         let boardHTML = Templates.boardTemplate(boards);
         let container = document.getElementById('accordion');
         container.innerHTML = container.innerHTML + boardHTML;
-        let columns = [];
         let columnContainer = document.getElementById(DOM.Constants.HTMLPrefixes.BOARD_ID + boards.id);
 
         for (let i = 0; i < statuses.length; i++) {
@@ -30,7 +29,6 @@ DOM = {
             let columnHTML = Templates.columnTemplate(statuses[i], boards.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
             let cardContainer = document.getElementById(boards.id + "-" + DOM.Constants.HTMLPrefixes.STATUS_COLUMN_ID + statuses[i].id);
-            columns.push(cardContainer);
             if (cardsByBoard !== undefined) {
                 let cardsForCurrentStatus = cardsByBoard[statuses[i].id];
 
