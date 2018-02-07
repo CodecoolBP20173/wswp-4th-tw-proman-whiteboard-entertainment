@@ -34,12 +34,15 @@ DataHandler = {
 
     _loadDefaultData: function() {
         this._data = Object.assign({}, this.Constants.DEFAULT_DATA);
+
+        // save the default values to local storage:
+        this._saveData();
     },
 
     _loadData: function() {
         // it is not called from outside
         // loads data from local storage, parses it and put into this._data property
-        if (localStorage.hasOwnProperty(this.Constants.KEY_IN_LOCAL_STORAGE)) {
+        if (this.Constants.KEY_IN_LOCAL_STORAGE in localStorage) {
             this._data = JSON.parse(localStorage[this.Constants.KEY_IN_LOCAL_STORAGE]);
 
             let BreakException = {};
@@ -77,7 +80,7 @@ DataHandler = {
     _saveData: function() {
         // it is not called from outside
         // saves the data from this._data to local storage
-        localStorage[this.keyInLocalStorage] = JSON.stringify(this._data);
+        localStorage[this.Constants.KEY_IN_LOCAL_STORAGE] = JSON.stringify(this._data);
         
     },
 
@@ -152,11 +155,8 @@ DataHandler = {
             "title": boardTitle,
             "is_active": true,
         };
-        if ('boards' in this._data) {
-            this._data.boards.push(board);
-        } else {
-            this._data['boards'] = [board] ;
-        }
+        this._data.boards.push(board);
+        this._saveData();
 
         callback(board);
     },
