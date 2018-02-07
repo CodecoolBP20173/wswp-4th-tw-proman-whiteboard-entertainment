@@ -57,6 +57,13 @@ DOM = {
     },
 
 
+    showCard: function(card) {
+        let cardContainer = document.getElementById(card.board_id + "-" + DOM.Constants.HTMLPrefixes.STATUS_COLUMN_ID + card.status_id);
+        let cardHTML = Templates.cardTemplate(card);
+        cardContainer.innerHTML = cardContainer.innerHTML + cardHTML;
+    },
+
+
     openBoard: function(boardId) {
         // generate status columns
         // getCardsByBoardID iterate through of the cards and call generateCard and connect them to the specified status column
