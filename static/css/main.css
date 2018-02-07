@@ -5,6 +5,7 @@
 body {
     background: #efefef;
 }
+
 .main {
     width: 80%;
     margin: 0 auto;
@@ -12,4 +13,9 @@ body {
 }
  h1, h4 {
      color: /*#1b1f3b;*/ #688cc4;
+ }
+
+ .gu-transit {
+     background-color: blue;
+     box-shadow: 4px 4px 1px 1px;
  }
