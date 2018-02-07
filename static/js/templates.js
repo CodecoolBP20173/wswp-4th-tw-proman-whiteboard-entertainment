@@ -52,5 +52,43 @@ Templates = {
                 </div>
             </div>`;
         return generatedBoard;
+    },
+
+    modalTemplate: function(header, label, buttonLabel, mode, card=undefined) {
+        let cardTitle = '';
+        if (card) {
+            cardTitle = card.title;
+        }
+        let generatedModal;
+        generatedModal = `
+            <div class="modal fade" id="create-${mode}-modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="eModalLabel">${header}</h5>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                    <label for="usr">${label}</label>
+                        <input type="text" class="form-control" id="create-${mode}-input" value="${cardTitle}">
+                    </div>
+                  </div>
+                  <div class="modal-footer" style="margin: 0 auto">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="create-board-button">${buttonLabel}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        `;
+        return generatedModal;
+    },
+
+    newCardButtonTemplate: function(board) {
+        let generatedButton;
+        generatedButton = `
+            <button type="button" id="${this.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" class="plus">&#43;</button>
+        `;
+        return generatedButton;
     }
 };
