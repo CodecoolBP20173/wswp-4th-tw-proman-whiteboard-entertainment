@@ -41,13 +41,22 @@ DataHandler = {
         let BreakException = {};
         let that = this;
         try {
-            this.Constants.DEFAULT_DATA.keys().forEach(function (currentKey) {
-                if (!that._data.contains(currentKey)) {
+            Object.keys(this.Constants.DEFAULT_DATA).forEach(function (currentKey) {
+                if (!that._data.hasOwnProperty(currentKey)) {
                     throw BreakException;
                 }
             });
+
+
+            // let objectKeys = Object.keys(this.Constants.DEFAULT_DATA);
+            // for(let i = 0; i < objectKeys.length; i++){
+            //     let currentKey = objectKeys[i];
+            //     if (!that._data.contains(currentKey)) {
+            //         throw BreakException;
+            //     }
+            // }
         } catch (exception) {
-            this._data = Object.assing({}, this.Constants.DEFAULT_DATA);
+            this._data = Object.assign({}, this.Constants.DEFAULT_DATA);
         }
     },
 
