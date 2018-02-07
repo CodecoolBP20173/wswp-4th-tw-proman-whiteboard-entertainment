@@ -21,7 +21,11 @@ DOM = {
         let statuses = DataHandler.getStatuses();
         let boardHTML = Templates.boardTemplate(boards);
         let container = document.getElementById('accordion');
-        container.innerHTML = container.innerHTML + boardHTML;
+        let node = document.createElement('div');
+        node.innerHTML = boardHTML;
+        container.appendChild(node);
+        //let newBoard = DataHandler.appendToElement(container, boardHTML);
+        //container.innerHTML = container.innerHTML + boardHTML;
         let columnContainer = document.getElementById(DOM.Constants.HTMLPrefixes.BOARD_ID + boards.id);
 
         for (let i = 0; i < statuses.length; i++) {
