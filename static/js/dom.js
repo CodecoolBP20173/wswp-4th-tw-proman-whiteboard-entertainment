@@ -29,7 +29,6 @@ DOM = {
             let columnHTML = Templates.columnTemplate(statuses[i], boards.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
             let cardContainer = document.getElementById(boards.id + "-" + DOM.Constants.HTMLPrefixes.STATUS_COLUMN_ID + statuses[i].id);
-
             if (cardsByBoard !== undefined) {
                 let cardsForCurrentStatus = cardsByBoard[statuses[i].id];
 
@@ -41,7 +40,9 @@ DOM = {
                 cardContainer.innerHTML = cardContainer.innerHTML + cardsHTML;
             }
         }
-
+        let arraylike = document.getElementsByClassName('column-body');
+        let containers = Array.prototype.slice.call(arraylike);
+        let drake = dragula({ containers: containers });
         // TODO: close all the boards
         // TODO: open this board
         /*
