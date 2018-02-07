@@ -152,11 +152,7 @@ DataHandler = {
             "title": boardTitle,
             "is_active": true,
         };
-        if ('boards' in this._data) {
-            this._data.boards.push(board);
-        } else {
-            this._data['boards'] = [board] ;
-        }
+        this._data.boards.push(board);
 
         callback(board);
     },
