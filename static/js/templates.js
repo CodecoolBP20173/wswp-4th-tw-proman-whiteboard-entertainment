@@ -20,8 +20,9 @@ Templates = {
         let generatedColumn;
         generatedColumn = `
                         <div class="card">
-                            <div class="card-block" id="${boardID}-${this.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}">
+                            <div class="card-block">
                                 <h4 class="card-header">${status.name}</h4>
+                                <div class="column-body" id="${boardID}-${this.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}"></div>
                             </div>
                         </div>`;
         return generatedColumn;
