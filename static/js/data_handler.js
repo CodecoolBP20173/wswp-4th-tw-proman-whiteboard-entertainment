@@ -26,7 +26,8 @@ DataHandler = {
             ],
             "boards": [],
             "cards": []
-        }
+        },
+        KEY_IN_LOCAL_STORAGE: 'proman-data' // the string that you use as a key in localStorage to save your application data
     },
 
     _data: {}, // it contains the boards and their cards and statuses. It is not called from outside.
@@ -41,7 +42,6 @@ DataHandler = {
     _loadData: function() {
         // it is not called from outside
         // loads data from local storage, parses it and put into this._data property
-
         if (this.Constants.KEY_IN_LOCAL_STORAGE in localStorage) {
             this._data = JSON.parse(localStorage[this.Constants.KEY_IN_LOCAL_STORAGE]);
 
@@ -81,7 +81,7 @@ DataHandler = {
         // it is not called from outside
         // saves the data from this._data to local storage
         localStorage[this.Constants.KEY_IN_LOCAL_STORAGE] = JSON.stringify(this._data);
-        
+
     },
 
 
@@ -169,3 +169,4 @@ DataHandler = {
 
     // here comes more features
 };
+
