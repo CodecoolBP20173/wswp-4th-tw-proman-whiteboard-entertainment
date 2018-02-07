@@ -34,6 +34,9 @@ DataHandler = {
 
     _loadDefaultData: function() {
         this._data = Object.assign({}, this.Constants.DEFAULT_DATA);
+
+        // save the default values to local storage:
+        this._saveData();
     },
 
     _loadData: function() {
@@ -153,6 +156,7 @@ DataHandler = {
             "is_active": true,
         };
         this._data.boards.push(board);
+        this._saveData();
 
         callback(board);
     },
