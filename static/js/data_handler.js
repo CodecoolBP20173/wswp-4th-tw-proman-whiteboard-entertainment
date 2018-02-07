@@ -64,7 +64,8 @@ DataHandler = {
     _saveData: function() {
         // it is not called from outside
         // saves the data from this._data to local storage
-        localStorage[this.keyInLocalStorage] = JSON.parse(this._data);
+        localStorage[this.keyInLocalStorage] = JSON.stringify(this._data);
+        
     },
 
 
