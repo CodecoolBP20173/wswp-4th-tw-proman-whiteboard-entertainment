@@ -83,8 +83,9 @@ DataHandler = {
     },
 
 
-    getStatuses: function(callback) {
+    getStatuses: function() {
         // the statuses are retrieved and then the callback function is called with the statuses
+        return this._data.statuses;
     },
 
 
@@ -93,7 +94,7 @@ DataHandler = {
     },
 
 
-    getCardsByBoardId: function(boardId, callback) {
+    getCardsByBoardId: function(boardId) {
         // the cards are retrieved and then the callback function is called with the cards
         // get all of the card details connected to the specified board
         // get statuses
@@ -104,6 +105,22 @@ DataHandler = {
                 ...
             }
         */
+        let cardsForStatuses = {};
+        let all_cards = this._data.cards;
+        let statuses = this.getStatuses();
+
+        for (let i = 0; i < statuses.length; i++) {
+            let key = statuses[i].id;
+            cardsForStatuses[key] = [];
+        }
+
+        for (let i = 0; i < all_cards.length; i++) {
+            if (all_cards[i].board_id === boardId) {
+                cardsForStatuses[all_cards[i].status_id].push(all_cards[i]);
+            }
+        }
+
+        return cardsForStatuses;
     },
 
 
@@ -115,6 +132,19 @@ DataHandler = {
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
         // callback is the showBoard from the dom module
+        let newID = (this._data.boards)? this._data.boards.length + 1 : 1;
+        let board = {
+            "id": newID,
+            "title": boardTitle,
+            "is_active": true,
+        };
+        if ('boards' in this._data) {
+            this._data.boards.push(board);
+        } else {
+            this._data['boards'] = [board] ;
+        }
+
+        callback(board);
     },
 
 
