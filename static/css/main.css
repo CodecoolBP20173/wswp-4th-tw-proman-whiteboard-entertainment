@@ -21,3 +21,7 @@ body {
      background-color: blue;
      box-shadow: 4px 4px 1px 1px;
  }
+
+ .board {
+     margin-bottom: 20px;
+ }

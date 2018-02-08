@@ -47,6 +47,12 @@ DOM = {
         let arraylike = document.getElementsByClassName('column-body');
         let containers = Array.prototype.slice.call(arraylike);
         let drake = dragula({ containers: containers });
+        drake.on('drag', function(){
+
+        });
+        drake.on('drag', function(){
+
+        });
         // TODO: close all the boards
         // TODO: open this board
         /*

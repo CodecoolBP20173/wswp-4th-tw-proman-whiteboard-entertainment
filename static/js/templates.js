@@ -19,7 +19,7 @@ Templates = {
     columnTemplate: function (status, boardID) {
         let generatedColumn;
         generatedColumn = `
-                        <div class="card">
+                        <div class="card column">
                             <div class="card-block w-100 h-100">
                                 <h4 class="card-header">${status.name}</h4>
                                 <div style="" class="w-100 h-100 column-body" id="${boardID}-${this.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}">
@@ -33,7 +33,7 @@ Templates = {
     boardTemplate: function (board) {
         let generatedBoard;
         generatedBoard = `
-            <div class="card">
+            <div class="card board">
                 <div class="card-header" id="heading${board.id}">
                     <div class="row">
                         <div class="col-10">
@@ -47,8 +47,6 @@ Templates = {
                             <div class="card_options" id="heading${board.id}-options"></div>
                         </div>
                     </div>
-                    
-                    
                 </div>
                 
                 
