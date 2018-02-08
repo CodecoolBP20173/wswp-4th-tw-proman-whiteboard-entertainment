@@ -42,11 +42,8 @@ Templates = {
                 </div>
                 <div id="collapse${board.id}" class="collapse" aria-labelledby="heading${board.id}" data-parent="#accordion">
                     <div class="card-body1" >
-                        <!-- card group -->
                         <div class="card-group" id="${this.Constants.HTMLPrefixes.BOARD_ID}${board.id}">
-                        
                         </div>
-                        <!-- end of card group -->
                     </div>
                 </div>
             </div>`;
