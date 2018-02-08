@@ -3,19 +3,37 @@
 }
 
 body {
-    background: #efefef;
+    background-image: url("https://www.ps4wallpapers.com/wp-content/uploads/2017/02/circuitboard.jpg");
+    background-size: 100%;
+
+
 }
 
 .main {
     width: 80%;
     margin: 0 auto;
     font-family: 'Raleway', sans-serif;
+
 }
  h1, h4 {
-     color: /*#1b1f3b;*/ #688cc4;
+     color: #688cc4;
  }
 
  .gu-transit {
      background-color: blue;
      box-shadow: 4px 4px 1px 1px;
  }
+
+ul#navigation {
+ position: fixed;
+ bottom: 0;
+ width: 80%;
+}
+
+.opacity {
+    opacity: 0.9;
+}
+
+.opacity:hover {
+    opacity: 1;
+}

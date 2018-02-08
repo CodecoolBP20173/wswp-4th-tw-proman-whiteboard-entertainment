@@ -108,6 +108,15 @@ DataHandler = {
         // the status is retrieved and then the callback function is called with the status
     },
 
+    getCardDetailsById: function (cardId) {
+        let cardDetails = this._data.cards;
+        for (let i=0; i<cardDetails.length; i++) {
+            if (cardDetails[i].id === cardId) {
+                return cardDetails[i];
+            }
+        }
+        return null;
+    },
 
     getCardsByBoardId: function(boardId) {
         // the cards are retrieved and then the callback function is called with the cards
@@ -162,6 +171,7 @@ DataHandler = {
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+    },
         let id = DataHandler._data.cards.length + 1;
         let order = DataHandler.getCardsByBoardId(boardId)[statusId].length + 1;
         let card = {
@@ -191,5 +201,15 @@ DataHandler = {
 
 
     // here comes more features
-};
 
+    sortCards: function(statusElementId) {
+        let cardElementList = document.getElementById(statusElementId).children;
+        let cardById = getCardDetailsById();
+        for (i=0; i>cardElementList.length; i++){
+            if (cardElementList[i].dataset.id === cardById){
+                return cardElementList[i];
+            }
+        }
+
+    }
+};
