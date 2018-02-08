@@ -38,7 +38,7 @@ Templates = {
                     <div class="row">
                         <div class="col-10">
                             <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
+                            <button class="btn button-box" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
                               ${board.title}
                             </button>
                             </h5>

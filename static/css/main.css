@@ -7,16 +7,17 @@
     z-index: 1000
 }
 
-
-
 #boards {
     background-color: green;
 }
 
 body {
-    background-image: url("https://www.ps4wallpapers.com/wp-content/uploads/2017/02/circuitboard.jpg");
     background-size: 100%;
     background-attachment: fixed;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.79), rgba(255, 247, 247, 0.21)),
+                        url("https://www.ps4wallpapers.com/wp-content/uploads/2017/02/circuitboard.jpg");
+    background-repeat: no-repeat, no-repeat;
+    background-position: left, right;
 }
 
 .main {
@@ -24,6 +25,11 @@ body {
     margin: 0 auto;
     font-family: 'Raleway', sans-serif;
     margin-bottom: 100px;
+}
+
+.button-box {
+        text-decoration: none;
+    background: inherit;
 }
 
 
@@ -48,3 +54,11 @@ body {
    width:100%;
    background:#999;
 }
+
+ .board {
+     opacity: 0.8;
+ }
+
+ .col, .board {
+     opacity: 1;
+ }
