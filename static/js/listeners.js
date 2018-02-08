@@ -1,85 +1,56 @@
 Listeners = {
-    Constants: {
-        MODAL_MODES: {
-            CREATE: 'create',
-            EDIT: 'edit'
-        }
-    },
 
     // This function is to initialize the application
-    assignBoardListeners: function(board) {
-        let currentBoard = document.getElementById('heading' + board.id);
+    assignCreateCardListener: function(board) {
+        let currentBoard = document.getElementById(Templates.Constants.HTMLPrefixes.HEADING + board.id);
+
         currentBoard.addEventListener('mouseenter', function() {
-            let addCardButton = Templates.newCardButtonTemplate(board);
-            let boardHeader = document.getElementById('heading' + board.id + '-options');
-            boardHeader.innerHTML = boardHeader.innerHTML + addCardButton;
-
-            if (boardHeader.children.length < 2) {
-                let newCardDOM = document.getElementById(Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-create-card');
-                newCardDOM.addEventListener('click', function() {
-                    let newModal = Templates.modalTemplate('Add new card', 'Card title', 'Add card', Templates.Constants.modalModes.CARD);
-                    let modalContainer = document.getElementById('modals');
-                    modalContainer.innerHTML = modalContainer.innerHTML + newModal;
-
-                    let modalDOM = $('#create-card-modal');
-                    let modalSaveButton = document.getElementById('create-card-button');
-                    Listeners.setupModal(modalSaveButton, board, Listeners.Constants.MODAL_MODES.CREATE);
-                    modalDOM.modal('show');
-                });
-            }
-
+            let buttonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-create-card';
+            document.getElementById(buttonId).style.visibility = 'visible';
         });
+
         currentBoard.addEventListener('mouseleave', function() {
-            let buttons = document.getElementsByClassName('plus');
-            while (buttons.length) {
-                let currentButton = buttons[0];
-                currentButton.parentNode.removeChild(currentButton);
-            }
+            let buttonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-create-card';
+            document.getElementById(buttonId).style.visibility = 'hidden';
+        });
+
+        let buttonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-create-card';
+        document.getElementById(buttonId).addEventListener('click', function () {
+            DOM.Modals.setConfirmationEvent(DOM.Constants.ModalIDs.CREATE_CARD, function () {
+                let title = DOM.Modals.getInputValue(DOM.Constants.ModalIDs.CREATE_CARD);
+                let statusId = DataHandler.Constants.DEFAULT_DATA.statuses[0].id;
+                DataHandler.createNewCard(title, board.id, statusId, DOM.showCard);
+            });
+
+            $('#' + DOM.Constants.ModalIDs.CREATE_CARD).modal('show');
         });
     },
 
-    setupModal: function(_modalButton, boardID, mode, card=null) {
-        if (mode === Listeners.Constants.MODAL_MODES.CREATE) {
-            _modalButton.addEventListener('click', function () {
-                let title = document.getElementById('create-card-input').value;
-                let statusID = DataHandler.Constants.DEFAULT_DATA.statuses[0].id;
-                DataHandler.createNewCard(title, boardID, statusID, DOM.showCard);
 
-                // TODO: We have to remove the modal
-                /*
-                    It's not so easy, because if we want to remove from the modals div, then first we have to de-attach
-                    the eventlistener from the button which triggered it... but it's in that same function so it might cause headache
-                 */
-            });
-        } else if (mode === Listeners.Constants.MODAL_MODES.EDIT) {
-            _modalButton.addEventListener('click', function () {
-                let title = document.getElementById('create-card-input').value;
-                DataHandler.updateCard(card, title);
+    assignCreateBoardListener: function() {
+        DOM.Modals.setConfirmationEvent(DOM.Constants.ModalIDs.CREATE_BOARD, function () {
+            DataHandler.createNewBoard(DOM.Modals.getInputValue(DOM.Constants.ModalIDs.CREATE_BOARD), DOM.showBoard);
+        });
 
-                // TODO: We have to remove the modal
-                /*
-                    It's not so easy, because if we want to remove from the modals div, then first we have to de-attach
-                    the eventlistener from the button which triggered it... but it's in that same function so it might cause headache
-                 */
-            });
-        }
-
+        document.getElementById(DOM.Constants.CREATE_BOARD_BUTTON_ID).addEventListener('click', function() {
+            DOM.Modals.setInputValue('');
+            $('#' + DOM.Constants.ModalIDs.CREATE_BOARD).modal('show');
+        });
     },
 
 
-    assignCardListeners: function(cardDOM, card) {
-        cardDOM.addEventListener('click', function() {
-            let modalHTML = Templates.modalTemplate('Edit card', 'Card title', 'Save changes', Templates.Constants.modalModes.CARD, card);
-            let modalContainer = document.getElementById('modals');
-            let modalNode = document.createElement('div');
-            modalNode.innerHTML = modalHTML;
-            modalContainer.appendChild(modalNode);
+    assignEditCardListener: function(card) {
+        let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.CARD_ID + card.id);
 
-            let modalDOM = document.getElementById('create-card-modal');
+        cardElement.addEventListener('click', function() {
+            DOM.Modals.setInputValue(DOM.Constants.ModalIDs.EDIT_CARD, card.title);
 
-            let modalSaveButton = document.getElementById('create-' + Templates.Constants.modalModes.CARD + '-button');
-            Listeners.setupModal(modalSaveButton, card.board_id, Listeners.Constants.MODAL_MODES.EDIT, card);
-            $('#create-card-modal').modal('show');
+            DOM.Modals.setConfirmationEvent(DOM.Constants.ModalIDs.EDIT_CARD, function () {
+                let title = DOM.Modals.getInputValue(DOM.Constants.ModalIDs.EDIT_CARD);
+                DataHandler.updateCard(card, title, DOM.updateCardTitle);
+            });
+
+            $('#' + DOM.Constants.ModalIDs.EDIT_CARD).modal('show');
         });
     }
 };
