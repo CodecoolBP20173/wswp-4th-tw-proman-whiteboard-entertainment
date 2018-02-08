@@ -43,8 +43,8 @@ Templates = {
                             </button>
                             </h5>
                         </div>
-                        <div class="col">
-                            <div class="card_options" id="heading${board.id}-options"></div>
+                        <div class="col justify-content-center">
+                            <div class="card_options justify-content-center" id="heading${board.id}-options"></div>
                         </div>
                     </div>
                 </div>

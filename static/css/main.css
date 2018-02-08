@@ -9,7 +9,7 @@
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     z-index: 1000;
-    background: #f2f9ff;
+    background: white;
 }
 
 #boards {
@@ -20,7 +20,7 @@ body {
     background-size: 100%;
     background-attachment: fixed;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.79), rgba(255, 247, 247, 0.21)),
-                        url("https://www.ps4wallpapers.com/wp-content/uploads/2017/02/circuitboard.jpg");
+                        url("https://orig00.deviantart.net/39cf/f/2014/070/7/b/synolog_dsm_5_default_wallpaper_by_bobi1024-d79txr6.jpg");
     background-repeat: no-repeat, no-repeat;
     background-position: left, right;
 }
@@ -76,4 +76,24 @@ div[id$='column_3'] .card-body {
 
 div[id$='column_4'] .card-body {
     background:#aabee6;
+}
+
+.jumbotron {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#footer {
+    height: 20px;
+    transition-duration: 0.3s;
+    background: 0px;
+
+}
+
+#footer:hover {
+    height: 130px;
+    background: 0px;
+    color: #05060B;
+
+
 }
