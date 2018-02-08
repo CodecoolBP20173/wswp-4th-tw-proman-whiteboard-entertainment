@@ -173,6 +173,20 @@ DataHandler = {
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
+
+        let id = DataHandler._data.cards.length + 1;
+        let order = this.getCardsByBoardId(boardId)[statusId].length + 1;
+        let card = {
+            "id": id,
+            "title": cardTitle,
+            "board_id": boardId,
+            "status_id": statusId,
+            "order": order
+        };
+        this._data.cards.push(card);
+        this._saveData();
+
+        callback(card);
     },
 
 
