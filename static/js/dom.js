@@ -21,7 +21,11 @@ DOM = {
         let statuses = DataHandler.getStatuses();
         let boardHTML = Templates.boardTemplate(boards);
         let container = document.getElementById('accordion');
-        container.innerHTML = container.innerHTML + boardHTML;
+        let node = document.createElement('div');
+        node.innerHTML = boardHTML;
+        container.appendChild(node);
+        //let newBoard = DataHandler.appendToElement(container, boardHTML);
+        //container.innerHTML = container.innerHTML + boardHTML;
         let columnContainer = document.getElementById(DOM.Constants.HTMLPrefixes.BOARD_ID + boards.id);
 
         for (let i = 0; i < statuses.length; i++) {
@@ -54,6 +58,13 @@ DOM = {
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
         // iterate through boards from local storage and add them to the html code with showBoard function
+    },
+
+
+    showCard: function(card) {
+        let cardContainer = document.getElementById(card.board_id + "-" + DOM.Constants.HTMLPrefixes.STATUS_COLUMN_ID + card.status_id);
+        let cardHTML = Templates.cardTemplate(card);
+        cardContainer.innerHTML = cardContainer.innerHTML + cardHTML;
     },
 
 
