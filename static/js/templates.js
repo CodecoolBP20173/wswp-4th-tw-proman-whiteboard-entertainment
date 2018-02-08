@@ -1,9 +1,9 @@
 Templates = {
     Constants: {
         HTMLPrefixes: {
-            BOARD_ID: 'board_',
-            STATUS_COLUMN_ID: 'status_column_',
-            CARD_ID: 'card_'
+            BOARD_ID: 'board-',
+            STATUS_COLUMN_ID: 'status-column-',
+            CARD_ID: 'card-'
         }
     },
 
@@ -16,14 +16,13 @@ Templates = {
         return generatedCard;
     },
 
-    columnTemplate: function (status, boardID) {
+    columnTemplate: function (status, boardId) {
         let generatedColumn;
         generatedColumn = `
                         <div class="card">
                             <div class="card-block w-100 h-100">
-                                <h4 class="card-header" data-id="${status.id}">${status.name}</h4>
-                                <div style="" class="w-100 h-100 column-body" id="${boardID}-${this.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}">
-                                
+                                <h4 class="card-header">${status.name}</h4>
+                                <div style="" class="w-100 h-100 column-body" data-status-id="${status.id}" data-board-id="${boardId}" id="${boardId}-${this.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}">
                                 </div>
                             </div>
                         </div>`;
