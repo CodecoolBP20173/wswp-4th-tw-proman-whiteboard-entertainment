@@ -35,12 +35,19 @@ Templates = {
         generatedBoard = `
             <div class="card">
                 <div class="card-header" id="heading${board.id}">
-                    <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
-                      ${board.title}
-                    </button>
-                    </h5>
-                    <div class="card_options" id="heading${board.id}-options"></div>
+                    <div class="row">
+                        <div class="col-10">
+                            <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
+                              ${board.title}
+                            </button>
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <div class="card_options" id="heading${board.id}-options"></div>
+                        </div>
+                    </div>
+                    
                     
                 </div>
                 
