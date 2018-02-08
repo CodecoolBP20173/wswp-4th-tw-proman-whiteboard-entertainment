@@ -29,6 +29,8 @@ body {
     width: 67%;
     margin: 0 auto;
     margin-bottom: 100px;
+    font-family: 'Raleway', sans-serif;
+
 }
 
 .button-box {
@@ -38,7 +40,7 @@ body {
 
 
  h1, h4 {
-     color: /*#1b1f3b;*/ #688cc4;
+     color: #688cc4;
  }
 
  .gu-transit {
@@ -86,14 +88,29 @@ div[id$='column_4'] .card-body {
 #footer {
     height: 20px;
     transition-duration: 0.3s;
-    background: 0px;
+    background: 0;
 
 }
 
 #footer:hover {
     height: 130px;
-    background: 0px;
+    background: 0;
     color: #05060B;
 
 
+}
+
+
+ul#navigation {
+ position: fixed;
+ bottom: 0;
+ width: 80%;
+}
+
+.opacity {
+    opacity: 0.9;
+}
+
+.opacity:hover {
+    opacity: 1;
 }
