@@ -57,10 +57,8 @@ Templates = {
         let generatedColumn;
         generatedColumn = `
                         <div class="card column">
-                            <div class="card-block w-100 h-100">
-                                <h4 class="card-header">${status.name}</h4>
-                                <div style="" class="w-100 h-100 column-body" data-status-id="${status.id}" data-board-id="${boardId}" id="${boardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}"></div>
-                            </div>
+                            <h4 class="card-header">${status.name}</h4>
+                            <div style="" class="card-block column-body w-100 h-100" data-status-id="${status.id}" data-board-id="${boardId}" id="${boardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}"></div>
                         </div>`;
         return generatedColumn;
     },

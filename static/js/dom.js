@@ -1,6 +1,7 @@
 // It uses data_handler.js to visualize elements
 DOM = {
     openedBoardId: null,
+    drake: null,
 
     Constants: {
         MODAL_CONTAINER_ID: Templates.Constants.HTMLPrefixes.MODAL + 'container',
@@ -60,7 +61,10 @@ DOM = {
         }
         let arrayLike = document.getElementsByClassName('column-body');
         let containers = Array.prototype.slice.call(arrayLike);
-        let drake = dragula({ containers: containers });
+        if (DOM.drake != null) {
+            DOM.drake.destroy();
+        }
+        DOM.drake = dragula({ containers: containers });
     },
 
 
