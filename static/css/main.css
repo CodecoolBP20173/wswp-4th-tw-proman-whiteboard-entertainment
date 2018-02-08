@@ -62,3 +62,19 @@ body {
  .col, .board {
      opacity: 1;
  }
+
+div[id$='column_1'] .card-body {
+    background:#dde5f5;
+}
+
+div[id$='column_2'] .card-body {
+    background:#ccd8f0;
+}
+
+div[id$='column_3'] .card-body {
+    background:#bbcbeb;
+}
+
+div[id$='column_4'] .card-body {
+    background:#aabee6;
+}
