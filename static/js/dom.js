@@ -47,29 +47,20 @@ DOM = {
         Listeners.assignCreateCardListener(board);
 
         for (let i = 0; i < statuses.length; i++) {
-            let cardsHTML = ``;
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
-            let cardContainer = document.getElementById(board.id + "-" + Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID + statuses[i].id);
             if (cardsByBoard !== undefined) {
                 let cardsForCurrentStatus = cardsByBoard[statuses[i].id];
 
                 for (let j = 0; j < cardsForCurrentStatus.length; j++) {
                     let currentCard = cardsForCurrentStatus[j];
-                    //cardsHTML += Templates.cardTemplate(currentCard);
                     DOM.showCard(currentCard);
                 }
-
-                //cardContainer.innerHTML = cardContainer.innerHTML + cardsHTML;
             }
         }
         let arrayLike = document.getElementsByClassName('column-body');
         let containers = Array.prototype.slice.call(arrayLike);
         let drake = dragula({ containers: containers });
-
-        // shows board appending them to #board div
-        // it adds necessary event listeners also
-        // iterate through board from local storage and add them to the html code with showBoard function
     },
 
 

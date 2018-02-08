@@ -22,6 +22,7 @@ Listeners = {
                 DataHandler.createNewCard(title, board.id, statusId, DOM.showCard);
             });
 
+            DOM.Modals.setInputValue(DOM.Constants.ModalIDs.CREATE_CARD, '');
             $('#' + DOM.Constants.ModalIDs.CREATE_CARD).modal('show');
         });
     },
@@ -33,7 +34,7 @@ Listeners = {
         });
 
         document.getElementById(DOM.Constants.CREATE_BOARD_BUTTON_ID).addEventListener('click', function() {
-            DOM.Modals.setInputValue('');
+            DOM.Modals.setInputValue(DOM.Constants.ModalIDs.CREATE_BOARD, '');
             $('#' + DOM.Constants.ModalIDs.CREATE_BOARD).modal('show');
         });
     },

@@ -44,7 +44,7 @@ Templates = {
         `);
     },
 
-    columnTemplate: function (status, boardID) {
+    columnTemplate: function (status, boardId) {
         let generatedColumn;
         generatedColumn = `
                         <div class="card">

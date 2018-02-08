@@ -45,29 +45,10 @@ DataHandler = {
         if (DataHandler.Constants.KEY_IN_LOCAL_STORAGE in localStorage) {
             DataHandler._data = JSON.parse(localStorage[DataHandler.Constants.KEY_IN_LOCAL_STORAGE]);
 
-            let BreakException = {};
-            let that = this;
-            try {
-                Object.keys(DataHandler.Constants.DEFAULT_DATA).forEach(function (currentKey) {
-                    if (!that._data.hasOwnProperty(currentKey)) {
-                        throw BreakException;
-                    }
-                });
-
-
-                // let objectKeys = Object.keys(DataHandler.Constants.DEFAULT_DATA);
-                // for(let i = 0; i < objectKeys.length; i++){
-                //     let currentKey = objectKeys[i];
-                //     if (!that._data.contains(currentKey)) {
-                //         throw BreakException;
-                //     }
-                // }
-            } catch (exception) {
-                if (exception === BreakException) {
+            for (let currentKey in DataHandler._data) {
+                if (DataHandler.Constants.DEFAULT_DATA.hasOwnProperty(currentKey) && !DataHandler._data.hasOwnProperty(currentKey)) {
                     DataHandler._loadDefaultData();
-                }
-                else {
-                    throw exception;
+                    break;
                 }
             }
         }
@@ -108,15 +89,6 @@ DataHandler = {
         // the status is retrieved and then the callback function is called with the status
     },
 
-    getCardDetailsById: function (cardId) {
-        let cardDetails = this._data.cards;
-        for (let i=0; i<cardDetails.length; i++) {
-            if (cardDetails[i].id === cardId) {
-                return cardDetails[i];
-            }
-        }
-        return null;
-    },
 
     getCardsByBoardId: function(boardId) {
         // the cards are retrieved and then the callback function is called with the cards
@@ -171,7 +143,7 @@ DataHandler = {
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-    },
+
         let id = DataHandler._data.cards.length + 1;
         let order = DataHandler.getCardsByBoardId(boardId)[statusId].length + 1;
         let card = {
@@ -197,19 +169,16 @@ DataHandler = {
         }
         DataHandler._saveData();
         callback(card);
-    }
+    },
 
-
-    // here comes more features
 
     sortCards: function(statusElementId) {
         let cardElementList = document.getElementById(statusElementId).children;
-        let cardById = getCardDetailsById();
+        let cardById = DataHandler.getCardDetailsById();
         for (i=0; i>cardElementList.length; i++){
             if (cardElementList[i].dataset.id === cardById){
                 return cardElementList[i];
             }
         }
-
     }
 };
