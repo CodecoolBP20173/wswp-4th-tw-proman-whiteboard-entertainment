@@ -30,19 +30,28 @@ Templates = {
 
     navbarTemplate: function () {
         return (`
-        <nav class="navbar navbar-light bg-light" style="height: 60px">
-          <a class="navbar-brand" href="#">
-              <div>
+        <nav id="topnavbar" class="navbar  justify-content-between" style="height: 60px">
+          
+            <div>
+              <a class="navbar-brand" href="#">
                   <img src="https://static.ezgif.com/images/bg-transparent.gif" width="60" height="60"  alt="" style="vertical-align: top; display: inline-block" >
                   <h1 style="vertical-align: bottom; display: inline-block">ProMan</h1>
-                  <button type="button" id="${DOM.Constants.CREATE_BOARD_BUTTON_ID}" class="btn btn-primary" data-toggle="modal" data-target="#${DOM.Constants.ModalIDs.CREATE_BOARD}" style="display: inline-block">
-                      Add new board
-                  </button>
-              </div>
-          </a>
+                            
+               </a>
+            </div>
+            <div>
+                  <button type="button" id="${DOM.Constants.CREATE_BOARD_BUTTON_ID}" class="btn btn-primary" data-toggle="modal" data-target="#${DOM.Constants.ModalIDs.CREATE_BOARD}" style="display: inline-block;">Add new board</button>
+            </div>
         </nav>
         `);
     },
+
+    footerTemplate: () => `
+        <nav id="footer" class="navbar navbar-light bg-light fixed-bottom justify-content-between" style="height: 60px">
+            <div id="footer">WhiteBoard Entertainment
+            <br><br>Bakcsa Bálint, Gál Ágnes, Lisztes Alex, Vlasics Tibor</div>
+        </nav>
+    `,
 
     columnTemplate: function (status, boardId) {
         let generatedColumn;
@@ -88,14 +97,14 @@ Templates = {
         return generatedBoard;
     },
 
-    bootstrapTemplate: () => `<div id="accordion" style="margin-top:30px"></div>`,
+    bootstrapTemplate: () => `<div id="accordion" style="margin-top:80px"></div>`,
 
     modalTemplate: (title, inputLabel, inputValue, confirmButtonLabel, closeButtonLabel, modalId) => `
         <div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="eModalLabel">${title}</h5>
+                        <h5 class="modal-title" id="ModalLabel">${title}</h5>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">

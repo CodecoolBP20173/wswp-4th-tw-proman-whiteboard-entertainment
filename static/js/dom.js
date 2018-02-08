@@ -85,6 +85,11 @@ DOM = {
     },
 
 
+    showFooter: function() {
+        document.getElementById(DOM.Constants.MAIN_DIV_ID).appendChild(Templates.createHTMLElementFromString(Templates.footerTemplate()));
+    },
+
+
     showCard: function(card) {
         let cardContainer = document.getElementById(card.board_id + "-" + Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID + card.status_id);
         let cardHTML = Templates.cardTemplate(card);
@@ -107,5 +112,6 @@ DOM = {
         Listeners.assignCreateBoardListener();
 
         DOM.showBoards();
+        DOM.showFooter();
     }
 };
