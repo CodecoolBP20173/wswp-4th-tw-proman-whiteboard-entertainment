@@ -173,7 +173,7 @@ DataHandler = {
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-
+    },
         let id = DataHandler._data.cards.length + 1;
         let order = this.getCardsByBoardId(boardId)[statusId].length + 1;
         let card = {
@@ -193,22 +193,13 @@ DataHandler = {
     // here comes more features
 
     sortCards: function(statusElementId) {
-        let statusElement = document.getElementById(statusElementId);
-        let cardElementList = statusElement.children;
-        let currentStatusId = statusElement.dataset.statusId;
-        let currentBoardId = statusElement.dataset.boardId;
-
+        let cardElementList = document.getElementById(statusElementId).children;
+        let cardById = getCardDetailsById();
         for (i=0; i>cardElementList.length; i++){
-            let cardById = getCardDetailsById(dataset.id);
-            if (i+1 !== cardById.order) {
-                cardById.order = i+1;
-            }
-            if (cardById.status_id !== currentStatusId) {
-                this.sortCards(`${currentBoardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${currentStatusId}`);
+            if (cardElementList[i].dataset.id === cardById){
+                return cardElementList[i];
             }
         }
 
     }
 };
-
-
