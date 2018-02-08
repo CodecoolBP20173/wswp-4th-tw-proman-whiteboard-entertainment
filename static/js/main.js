@@ -14,7 +14,8 @@ function assignBoardListeners(board) {
                 modalContainer.innerHTML = modalContainer.innerHTML + newModal;
 
                 let modalDOM = $('#create-card-modal');
-                setupModal(modalDOM, board);
+                let modalSaveButton = document.getElementById('create-card-button');
+                setupModal(modalSaveButton, board);
                 modalDOM.modal('show');
             });
         }
@@ -30,8 +31,8 @@ function assignBoardListeners(board) {
 }
 
 
-function setupModal(_modal, board) {
-    _modal.on('hidden.bs.modal', function () {
+function setupModal(_modalButton, board) {
+    _modalButton.addEventListener('click', function () {
         let title = document.getElementById('create-card-input').value;
         let boardID = board.id;
         let statusID = DataHandler.Constants.DEFAULT_DATA.statuses[0].id;

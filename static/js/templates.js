@@ -87,7 +87,7 @@ Templates = {
                   </div>
                   <div class="modal-footer" style="margin: 0 auto">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="create-board-button">${buttonLabel}</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="create-${mode}-button">${buttonLabel}</button>
                   </div>
                 </div>
               </div>
