@@ -2,7 +2,7 @@
 // feel free to extend and change to fit your needs
 
 // (watch out: when you would like to use a property/function of an object from the
-// object itself then you must use the 'this' keyword before. For example: 'this._data' below)
+// object itself then you must use the 'this' keyword before. For example: 'DataHandler._data' below)
 DataHandler = {
     Constants: {
         DEFAULT_DATA: {
@@ -33,66 +33,45 @@ DataHandler = {
     _data: {}, // it contains the boards and their cards and statuses. It is not called from outside.
 
     _loadDefaultData: function() {
-        this._data = Object.assign({}, this.Constants.DEFAULT_DATA);
+        DataHandler._data = Object.assign({}, DataHandler.Constants.DEFAULT_DATA);
 
         // save the default values to local storage:
-        this._saveData();
+        DataHandler._saveData();
     },
 
     _loadData: function() {
         // it is not called from outside
-        // loads data from local storage, parses it and put into this._data property
-        if (this.Constants.KEY_IN_LOCAL_STORAGE in localStorage) {
-            this._data = JSON.parse(localStorage[this.Constants.KEY_IN_LOCAL_STORAGE]);
+        // loads data from local storage, parses it and put into DataHandler._data property
+        if (DataHandler.Constants.KEY_IN_LOCAL_STORAGE in localStorage) {
+            DataHandler._data = JSON.parse(localStorage[DataHandler.Constants.KEY_IN_LOCAL_STORAGE]);
 
-            let BreakException = {};
-            let that = this;
-            try {
-                Object.keys(this.Constants.DEFAULT_DATA).forEach(function (currentKey) {
-                    if (!that._data.hasOwnProperty(currentKey)) {
-                        throw BreakException;
-                    }
-                });
-
-
-                // let objectKeys = Object.keys(this.Constants.DEFAULT_DATA);
-                // for(let i = 0; i < objectKeys.length; i++){
-                //     let currentKey = objectKeys[i];
-                //     if (!that._data.contains(currentKey)) {
-                //         throw BreakException;
-                //     }
-                // }
-            } catch (exception) {
-                if (exception === BreakException) {
-                    this._loadDefaultData();
-                }
-                else {
-                    throw exception;
+            for (let currentKey in DataHandler._data) {
+                if (DataHandler.Constants.DEFAULT_DATA.hasOwnProperty(currentKey) && !DataHandler._data.hasOwnProperty(currentKey)) {
+                    DataHandler._loadDefaultData();
+                    break;
                 }
             }
         }
         else {
-            this._loadDefaultData();
+            DataHandler._loadDefaultData();
         }
     },
 
 
     _saveData: function() {
         // it is not called from outside
-        // saves the data from this._data to local storage
-        localStorage[this.Constants.KEY_IN_LOCAL_STORAGE] = JSON.stringify(this._data);
+        // saves the data from DataHandler._data to local storage
+        localStorage[DataHandler.Constants.KEY_IN_LOCAL_STORAGE] = JSON.stringify(DataHandler._data);
 
     },
 
 
     init: function() {
-        this._loadData();
+        DataHandler._loadData();
     },
 
 
-    getBoards: function(callback) {
-        // the boards are retrieved and then the callback function is called with the boards
-    },
+    getBoards: () => DataHandler._data.boards,
 
 
     getBoard: function(boardId, callback) {
@@ -102,7 +81,7 @@ DataHandler = {
 
     getStatuses: function() {
         // the statuses are retrieved and then the callback function is called with the statuses
-        return this._data.statuses;
+        return DataHandler._data.statuses;
     },
 
 
@@ -110,15 +89,6 @@ DataHandler = {
         // the status is retrieved and then the callback function is called with the status
     },
 
-    getCardDetailsById: function (cardId) {
-        let cardDetails = this._data.cards;
-        for (let i=0; i<cardDetails.length; i++) {
-            if (cardDetails[i].id === cardId) {
-                return cardDetails[i];
-            }
-        }
-        return null;
-    },
 
     getCardsByBoardId: function(boardId) {
         // the cards are retrieved and then the callback function is called with the cards
@@ -132,8 +102,8 @@ DataHandler = {
             }
         */
         let cardsForStatuses = {};
-        let all_cards = this._data.cards;
-        let statuses = this.getStatuses();
+        let all_cards = DataHandler._data.cards;
+        let statuses = DataHandler.getStatuses();
 
         for (let i = 0; i < statuses.length; i++) {
             let key = statuses[i].id;
@@ -158,14 +128,14 @@ DataHandler = {
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
         // callback is the showBoard from the dom module
-        let newID = (this._data.boards)? this._data.boards.length + 1 : 1;
+        let newID = (DataHandler._data.boards)? DataHandler._data.boards.length + 1 : 1;
         let board = {
             "id": newID,
             "title": boardTitle,
             "is_active": true,
         };
-        this._data.boards.push(board);
-        this._saveData();
+        DataHandler._data.boards.push(board);
+        DataHandler._saveData();
 
         callback(board);
     },
@@ -173,9 +143,9 @@ DataHandler = {
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-    },
+
         let id = DataHandler._data.cards.length + 1;
-        let order = this.getCardsByBoardId(boardId)[statusId].length + 1;
+        let order = DataHandler.getCardsByBoardId(boardId)[statusId].length + 1;
         let card = {
             "id": id,
             "title": cardTitle,
@@ -183,23 +153,32 @@ DataHandler = {
             "status_id": statusId,
             "order": order
         };
-        this._data.cards.push(card);
-        this._saveData();
+        DataHandler._data.cards.push(card);
+        DataHandler._saveData();
 
         callback(card);
     },
 
 
-    // here comes more features
+    updateCard: function(card, newTitle, callback) {
+        for (let currentCard of DataHandler._data.cards) {
+            if (currentCard.id === card.id) {
+                currentCard.title = newTitle;
+                break;
+            }
+        }
+        DataHandler._saveData();
+        callback(card);
+    },
+
 
     sortCards: function(statusElementId) {
         let cardElementList = document.getElementById(statusElementId).children;
-        let cardById = getCardDetailsById();
+        let cardById = DataHandler.getCardDetailsById();
         for (i=0; i>cardElementList.length; i++){
             if (cardElementList[i].dataset.id === cardById){
                 return cardElementList[i];
             }
         }
-
     }
 };

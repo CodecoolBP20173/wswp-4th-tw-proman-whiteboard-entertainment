@@ -20,69 +20,14 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
         <script src="{{ url_for('static', filename='js/templates.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/listeners.js') }}" defer></script>
         <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 
     </head>
     <body>
-    <div class="main">
-
-                <!-- Image and text -->
-        <nav class="navbar navbar-light bg-light" style="height: 60px">
-              <div>
-                  <img src="https://static.ezgif.com/images/bg-transparent.gif" width="60" height="60"  alt="" style="vertical-align: top; display: inline-block" >
-                  <h1 style="vertical-align: bottom; display: inline-block">ProMan</h1>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-board-modal" style="display: inline-block">
-                      Add new board
-                  </button>
-
-              </div>
-          </a>
-        </nav>
-
-
-
-        <!-- bootstrap accordion -->
-        <div id="accordion" style="margin-top:30px">
-
-
-        </div> <!-- end of accordion -->
-
-
-
-    </div>
-
-    <div id="modals">
-
-         <!-- Modal -->
-        <div class="modal fade" id="create-board-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add new board</h5>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                <label for="usr">Title:</label>
-                    <input type="text" class="form-control" id="create-board-input">
-                </div>
-              </div>
-              <div class="modal-footer" style="margin: 0 auto">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="create-board-button">Create board</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ul id="navigation">
-    </div>
-
-        <nav class="navbar navbar-light bg-light" style="height: 60px" class="sidebarbottom">
-          <img src="https://i.pinimg.com/originals/31/ed/0c/31ed0c65c81cb6b2741d65f7d49aeb55.png" width="185" class="centerImage">
-
-        </ul>
-        </div>
-
+        <div id='main-content-container' class="main"></div>
+        <div id="modal-container"></div>
     </body>
 </html>
