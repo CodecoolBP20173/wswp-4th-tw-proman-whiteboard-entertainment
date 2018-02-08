@@ -1,3 +1,14 @@
+
+#topnavbar {
+    overflow: hidden;
+    width: 100%; /* Full width */
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    z-index: 1000
+}
+
+
+
 #boards {
     background-color: green;
 }
@@ -13,6 +24,8 @@ body {
     margin: 0 auto;
     font-family: 'Raleway', sans-serif;
 }
+
+
  h1, h4 {
      color: /*#1b1f3b;*/ #688cc4;
  }
@@ -23,5 +36,5 @@ body {
  }
 
  .board {
-     margin-bottom: 20px;
+     margin-bottom: 10px;
  }
