@@ -30,10 +30,10 @@ ul#navigation {
  width: 80%;
 }
 
-.card {
-    opacity: 0.8;
+.opacity {
+    opacity: 0.9;
 }
 
-.card:hover {
-    opacity: 0.9;
+.opacity:hover {
+    opacity: 1;
 }

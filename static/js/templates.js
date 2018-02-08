@@ -32,8 +32,8 @@ Templates = {
     boardTemplate: function (board) {
         let generatedBoard;
         generatedBoard = `
-            <div class="card">
-                <div class="card-header" id="heading${board.id}">
+            <div class="card opacity">
+                <div class="card-header board-header" id="heading${board.id}">
                     <h5 class="mb-0">
                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
                       ${board.title}

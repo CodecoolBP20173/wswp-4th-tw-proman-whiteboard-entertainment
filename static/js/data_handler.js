@@ -179,11 +179,18 @@ DataHandler = {
     // here comes more features
 
     sortCards: function(statusElementId) {
-        let cardElementList = document.getElementById(statusElementId).children;
-        let cardById = getCardDetailsById();
+        let statusElement = document.getElementById(statusElementId);
+        let cardElementList = statusElement.children;
+        let currentStatusId = statusElement.dataset.statusId;
+        let currentBoardId = statusElement.dataset.boardId;
+
         for (i=0; i>cardElementList.length; i++){
-            if (cardElementList[i].dataset.id === cardById){
-                return cardElementList[i];
+            let cardById = getCardDetailsById(dataset.id);
+            if (i+1 !== cardById.order) {
+                cardById.order = i+1;
+            }
+            if (cardById.status_id !== currentStatusId) {
+                this.sortCards(`${currentBoardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${currentStatusId}`);
             }
         }
 
