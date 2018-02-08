@@ -162,14 +162,14 @@ DataHandler = {
     },
 
 
-    createNewCard: function(cardTitle, boardId, statusId, callback) {
+    createNewCard: function(cardTitle, board, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
         let id = DataHandler._data.cards.length + 1;
-        let order = this.getCardsByBoardId(boardId)[statusId].length + 1;
+        let order = this.getCardsByBoardId(board.id)[statusId].length + 1;
         let card = {
             "id": id,
             "title": cardTitle,
-            "board_id": boardId,
+            "board_id": board.id,
             "status_id": statusId,
             "order": order
         };
@@ -178,6 +178,22 @@ DataHandler = {
 
         callback(card);
     },
+
+
+    updateCard: function(card, newTitle) {
+        let oldCard;
+        for (let i = 0; i < this._data.cards.length; i++) {
+            let currentCard = this._data.cards[i];
+            if (currentCard.id === card.id) {
+                oldCard = currentCard;
+                this._data.cards[i].title = newTitle;
+                this._saveData();
+            }
+        }
+        oldCard.title = newTitle;
+        let cardDOM = document.getElementById(DOM.Constants.HTMLPrefixes.CARD_ID + card.id);
+        cardDOM.innerText = oldCard.title;
+    }
 
 
     // here comes more features

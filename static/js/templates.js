@@ -4,6 +4,11 @@ Templates = {
             BOARD_ID: 'board_',
             STATUS_COLUMN_ID: 'status_column_',
             CARD_ID: 'card_'
+        },
+
+        modalModes: {
+            CARD: 'card',
+            BOARD: 'board'
         }
     },
 
@@ -87,7 +92,7 @@ Templates = {
                   </div>
                   <div class="modal-footer" style="margin: 0 auto">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="create-${mode}-button">${buttonLabel}</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="create-${mode}-button" value="${card}">${buttonLabel}</button>
                   </div>
                 </div>
               </div>

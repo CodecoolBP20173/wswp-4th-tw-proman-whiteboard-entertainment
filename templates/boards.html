@@ -22,6 +22,7 @@
         <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
         <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
         <script src="{{ url_for('static', filename='js/templates.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/listeners.js') }}" defer></script>
         <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 
     </head>
@@ -54,26 +55,6 @@
     </div>
 
     <div id="modals">
-         <!-- Modal -->
-        <div class="modal fade" id="create-board-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add new board</h5>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                <label for="usr">Title:</label>
-                    <input type="text" class="form-control" id="create-board-input">
-                </div>
-              </div>
-              <div class="modal-footer" style="margin: 0 auto">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="create-board-button">Create board</button>
-              </div>
-            </div>
-          </div>
-        </div>
     </div>
 
 

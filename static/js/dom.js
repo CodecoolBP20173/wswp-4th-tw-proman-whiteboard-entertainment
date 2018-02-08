@@ -24,9 +24,8 @@ DOM = {
         let node = document.createElement('div');
         node.innerHTML = boardHTML;
         container.appendChild(node);
-        //let newBoard = DataHandler.appendToElement(container, boardHTML);
-        //container.innerHTML = container.innerHTML + boardHTML;
         let columnContainer = document.getElementById(DOM.Constants.HTMLPrefixes.BOARD_ID + boards.id);
+        Listeners.assignBoardListeners(boards);
 
         for (let i = 0; i < statuses.length; i++) {
             let cardsHTML = ``;
@@ -38,22 +37,16 @@ DOM = {
 
                 for (let j = 0; j < cardsForCurrentStatus.length; j++) {
                     let currentCard = cardsForCurrentStatus[j];
-                    cardsHTML += Templates.cardTemplate(currentCard);
+                    //cardsHTML += Templates.cardTemplate(currentCard);
+                    DOM.showCard(currentCard);
                 }
 
-                cardContainer.innerHTML = cardContainer.innerHTML + cardsHTML;
+                //cardContainer.innerHTML = cardContainer.innerHTML + cardsHTML;
             }
         }
         let arraylike = document.getElementsByClassName('column-body');
         let containers = Array.prototype.slice.call(arraylike);
         let drake = dragula({ containers: containers });
-        // TODO: close all the boards
-        // TODO: open this board
-        /*
-            By default the freshly generated boards are open (if you create more, then all of them) because that's
-            how the templates are made.
-            We either close all the boards and open this board OR make the template to be created as collapsed....
-         */
 
         // shows boards appending them to #boards div
         // it adds necessary event listeners also
@@ -64,7 +57,18 @@ DOM = {
     showCard: function(card) {
         let cardContainer = document.getElementById(card.board_id + "-" + DOM.Constants.HTMLPrefixes.STATUS_COLUMN_ID + card.status_id);
         let cardHTML = Templates.cardTemplate(card);
-        cardContainer.innerHTML = cardContainer.innerHTML + cardHTML;
+        //cardContainer.innerHTML = cardContainer.innerHTML + cardHTML;
+        /*let node = document.createElement('div');
+        node.innerHTML = cardHTML;
+        cardContainer.appendChild(node);*/
+        let newContent = document.createElement('div');
+        newContent.innerHTML = cardHTML;
+
+        while (newContent.firstChild) {
+            cardContainer.appendChild(newContent.firstChild);
+        }
+        let cardDOM = document.getElementById(DOM.Constants.HTMLPrefixes.CARD_ID + card.id);
+        Listeners.assignCardListeners(cardDOM, card);
     },
 
 
