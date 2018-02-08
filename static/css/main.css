@@ -20,9 +20,10 @@ body {
 }
 
 .main {
-    width: 80%;
+    width: 67%;
     margin: 0 auto;
     font-family: 'Raleway', sans-serif;
+    margin-bottom: 100px;
 }
 
 
@@ -38,3 +39,12 @@ body {
  .board {
      margin-bottom: 10px;
  }
+
+ #footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background:#999;
+}
