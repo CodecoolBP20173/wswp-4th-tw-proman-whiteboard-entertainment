@@ -120,9 +120,16 @@ DataHandler = {
     },
 
 
-    getCard: function(cardId, callback) {
-        // the card is retrieved and then the callback function is called with the card
-    },
+
+    getCard: function(cardId) {
+        for (let currentCard of DataHandler._data.cards) {
+            if (currentCard.id === cardId) {
+                return currentCard;
+            }
+        }
+        return null;
+    }
+    ,
 
 
     createNewBoard: function(boardTitle, callback) {
@@ -173,12 +180,23 @@ DataHandler = {
 
 
     sortCards: function(statusElementId) {
-        let cardElementList = document.getElementById(statusElementId).children;
-        let cardById = DataHandler.getCardDetailsById();
-        for (i=0; i>cardElementList.length; i++){
-            if (cardElementList[i].dataset.id === cardById){
-                return cardElementList[i];
+        let cardColumnElement = document.getElementById(statusElementId);
+        let cardElementList = cardColumnElement.children;
+        let boardId = cardColumnElement.dataset.boardId;
+        let statusId = parseInt(cardColumnElement.dataset.statusId);
+
+        for (let i = 0; i < cardElementList.length; i++){
+            let card = DataHandler.getCard(parseInt(cardElementList[i].dataset.cardId));
+
+            if (card.order !== i + 1){
+                card.order = i + 1;
             }
+            if (card.status_id !== statusId) {
+                DataHandler.sortCards(`${boardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${card.status_id}`);
+                card.status_id = statusId;
+            }
+
         }
+        DataHandler._saveData();
     }
 };

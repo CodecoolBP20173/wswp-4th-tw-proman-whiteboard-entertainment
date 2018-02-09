@@ -29,7 +29,7 @@ DOM = {
                 DOM.Dragula._drake.destroy();
             }
 
-            DOM.drake = dragula({ containers: DOM.Dragula._convertElementArray(elementArray) });
+            DOM.Dragula._drake = dragula({ containers: DOM.Dragula._convertElementArray(elementArray) });
         }
     },
 
@@ -54,6 +54,15 @@ DOM = {
     },
 
 
+    compareCardOrders: function(cardA, cardB) {
+        if (cardA.order < cardB.order)
+            return -1;
+        if (cardA.order > cardB.order)
+            return 1;
+        return 0;
+    },
+
+
     showBoard: function(board) {
         let cardsByBoard = DataHandler.getCardsByBoardId(board.id);
         let statuses = DataHandler.getStatuses();
@@ -69,7 +78,7 @@ DOM = {
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
             if (cardsByBoard !== undefined) {
-                let cardsForCurrentStatus = cardsByBoard[statuses[i].id];
+                let cardsForCurrentStatus = cardsByBoard[statuses[i].id].sort(DOM.compareCardOrders);
 
                 for (let j = 0; j < cardsForCurrentStatus.length; j++) {
                     let currentCard = cardsForCurrentStatus[j];
@@ -79,7 +88,7 @@ DOM = {
         }
         DOM.Dragula.refresh(document.getElementsByClassName('column-body'));
         DOM.Dragula.addListener('drop', function(element) {
-
+            DataHandler.sortCards(element.parentNode.id);
         });
     },
 

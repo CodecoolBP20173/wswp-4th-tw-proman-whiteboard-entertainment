@@ -22,7 +22,7 @@ Templates = {
     cardTemplate: function (card) {
         let generatedCard;
         generatedCard = `
-                    <div class="card card-default" style="margin: 20px" align="center">
+                    <div class="card card-default" style="margin: 20px" align="center" data-card-id="${card.id}">
                         <div class="card-body" id="${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}">${card.title}</div>
                     </div>`;
         return generatedCard;
