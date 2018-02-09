@@ -31,7 +31,7 @@ Templates = {
 
     navbarTemplate: function () {
         return (`
-        <nav id="topnavbar" class="navbar  justify-content-between" style="height: 60px">
+        <nav id="topnavbar" class="navbar justify-content-between" style="height: 60px">
           
             <div>
               <a class="navbar-brand" href="#">
@@ -70,7 +70,7 @@ Templates = {
     boardTemplate: function (board) {
         let generatedBoard;
         generatedBoard = `
-            <div class="card board">
+            <div class="card board main-background-color">
                 <div class="card-header" id="heading-${board.id}">
                     <div class="row">
                         <div class="col-10">
@@ -82,7 +82,7 @@ Templates = {
                         </div>
                         <div class="col justify-content-center">
                             <div class="card_options justify-content-center" id="heading-${board.id}-options">
-                                <button type="button" id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden;" class="plus">&#43;</button>
+                                <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden; font-size: 24px;  color:#595F63" class="fa fa-plus"></i>
                             </div>
                         </div>
                     </div>
