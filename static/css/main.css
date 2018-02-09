@@ -37,9 +37,12 @@ body {
     background: inherit;
 }
 
+.main-background-color {
+    background: #F2FAFF;
+}
 
  h1, h4 {
-     color: /*#1b1f3b;*/ #688cc4;
+     color: #688cc4;
  }
 
  .gu-transit {
@@ -63,19 +66,19 @@ body {
      opacity: 1;
  }
 
-div[id$='column_1'] .card-body {
+div[id$='column-1'] .card-body {
     background:#dde5f5;
 }
 
-div[id$='column_2'] .card-body {
+div[id$='column-2'] .card-body {
     background:#ccd8f0;
 }
 
-div[id$='column_3'] .card-body {
+div[id$='column-3'] .card-body {
     background:#bbcbeb;
 }
 
-div[id$='column_4'] .card-body {
+div[id$='column-4'] .card-body {
     background:#aabee6;
 }
 

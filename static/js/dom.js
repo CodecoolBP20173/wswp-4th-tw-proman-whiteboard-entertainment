@@ -18,7 +18,7 @@ DOM = {
     Dragula: {
         _drake: null,
 
-        _convertElementArray:  (unconvertedArray) => Array.prototype.slice.call(unconvertedArray),
+        _convertElementArray: (unconvertedArray) => Array.prototype.slice.call(unconvertedArray),
 
         addListener: function (type, callback) {
             DOM.Dragula._drake.on(type, callback);
