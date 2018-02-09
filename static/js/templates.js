@@ -31,7 +31,7 @@ Templates = {
 
     navbarTemplate: function () {
         return (`
-        <nav id="topnavbar" class="navbar justify-content-between" style="height: 60px">
+        <nav id="topnavbar" class="navbar justify-content-between" style="height: 60px;">
           
             <div>
               <a class="navbar-brand" href="#">
@@ -49,7 +49,7 @@ Templates = {
 
 
     footerTemplate: () => `
-        <nav id="footer" class="navbar navbar-light bg-light fixed-bottom justify-content-between" style="height: 60px">
+        <nav id="footerNavbar" class="navbar navbar-light bg-light fixed-bottom justify-content-between" style="height: 60px">
             <div id="footer">WhiteBoard Entertainment
             <br><br>Bakcsa Bálint, Gál Ágnes, Lisztes Alex, Vlasics Tibor</div>
         </nav>
