@@ -3,9 +3,15 @@ app = Flask(__name__)
 
 
 @app.route("/")
+def main():
+    ''' this is a one-pager which shows all the boards and cards '''
+    return render_template('main.html')
+
+@app.route("/boards")
 def boards():
     ''' this is a one-pager which shows all the boards and cards '''
     return render_template('boards.html')
+
 
 
 def main():

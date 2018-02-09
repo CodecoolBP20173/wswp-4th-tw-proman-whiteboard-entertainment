@@ -22,36 +22,46 @@ Templates = {
     cardTemplate: function (card) {
         let generatedCard;
         generatedCard = `
-                    <div class="card card-default" style="margin: 20px" align="center">
+                    <div class="card card-default" style="margin: 20px" align="center" data-card-id="${card.id}">
                         <div class="card-body" id="${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}">${card.title}</div>
                     </div>`;
         return generatedCard;
     },
 
+
     navbarTemplate: function () {
         return (`
-        <nav class="navbar navbar-light bg-light" style="height: 60px">
-          <a class="navbar-brand" href="#">
-              <div>
+        <nav id="topnavbar" class="navbar justify-content-between" style="height: 60px;">
+          
+            <div>
+              <a class="navbar-brand" href="#">
                   <img src="https://static.ezgif.com/images/bg-transparent.gif" width="60" height="60"  alt="" style="vertical-align: top; display: inline-block" >
                   <h1 style="vertical-align: bottom; display: inline-block">ProMan</h1>
-                  <button type="button" id="${DOM.Constants.CREATE_BOARD_BUTTON_ID}" class="btn btn-primary" data-toggle="modal" data-target="#${DOM.Constants.ModalIDs.CREATE_BOARD}" style="display: inline-block">
-                      Add new board
-                  </button>
-              </div>
-          </a>
+                            
+               </a>
+            </div>
+            <div>
+                  <button type="button" id="${DOM.Constants.CREATE_BOARD_BUTTON_ID}" class="btn btn-primary" data-toggle="modal" data-target="#${DOM.Constants.ModalIDs.CREATE_BOARD}" style="display: inline-block;">Add new board</button>
+            </div>
         </nav>
         `);
     },
 
+
+    footerTemplate: () => `
+        <nav id="footerNavbar" class="navbar navbar-light bg-light fixed-bottom justify-content-between" style="height: 60px">
+            <div id="footer">WhiteBoard Entertainment
+            <br><br>Bakcsa Bálint, Gál Ágnes, Lisztes Alex, Vlasics Tibor</div>
+        </nav>
+    `,
+
+
     columnTemplate: function (status, boardId) {
         let generatedColumn;
         generatedColumn = `
-                        <div class="card">
-                            <div class="card-block w-100 h-100">
-                                <h4 class="card-header">${status.name}</h4>
-                                <div style="" class="w-100 h-100 column-body" data-status-id="${status.id}" data-board-id="${boardId}" id="${boardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}"></div>
-                            </div>
+                        <div class="card column">
+                            <h4 class="card-header">${status.name}</h4>
+                            <div style="" class="card-block column-body w-100 h-100" data-status-id="${status.id}" data-board-id="${boardId}" id="${boardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${status.id}"></div>
                         </div>`;
         return generatedColumn;
     },
@@ -60,41 +70,42 @@ Templates = {
     boardTemplate: function (board) {
         let generatedBoard;
         generatedBoard = `
-            <div class="card">
+            <div class="card board main-background-color">
                 <div class="card-header" id="heading-${board.id}">
                     <div class="row">
                         <div class="col-10">
                             <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
+                            <button class="btn button-box" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
                               ${board.title}
                             </button>
                             </h5>
                         </div>
-                        <div class="col">
-                            <div class="card_options" id="heading-${board.id}-options">
-                                 <button type="button" id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden;" class="plus">&#43;</button>
+                        <div class="col justify-content-center">
+                            <div class="card_options justify-content-center" id="heading-${board.id}-options">
+                                <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden; font-size: 24px;  color:#595F63" class="fa fa-plus"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                
                 <div id="collapse${board.id}" class="collapse" aria-labelledby="heading-${board.id}" data-parent="#accordion">
                     <div class="card-body1" >
-                        <div class="card-group" id="${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}"></div>
+                        <div class="card-group" id="${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}">
                     </div>
                 </div>
-            </div>`;
+            </div>
+        </div>`;
         return generatedBoard;
     },
 
-    bootstrapTemplate: () => `<div id="accordion" style="margin-top:30px"></div>`,
+    bootstrapTemplate: () => `<div id="accordion" style="margin-top:80px"></div>`,
 
     modalTemplate: (title, inputLabel, inputValue, confirmButtonLabel, closeButtonLabel, modalId) => `
         <div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="eModalLabel">${title}</h5>
+                        <h5 class="modal-title" id="ModalLabel">${title}</h5>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">

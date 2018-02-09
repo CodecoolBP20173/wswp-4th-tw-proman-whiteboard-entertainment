@@ -15,9 +15,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
         <!-- googlefonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
@@ -27,14 +24,40 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/templates.js') }}" defer></script>
         <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/listeners.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/templates.js') }}" defer></script>
         <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 
     </head>
     <body>
-        <div id='main-content-container' class="main"></div>
-        <div id="modal-container"></div>
+              <!-- Image and text -->
+            <nav id="topnavbar" class="navbar  justify-content-between" style="height: 60px">
+                <div>
+                    <a class="navbar-brand" href="#">
+                        <img src="https://static.ezgif.com/images/bg-transparent.gif" width="60" height="60" alt=""
+                             style="vertical-align: top; display: inline-block">
+                        <h1 style="vertical-align: bottom; display: inline-block">Pro-Man</h1>
+                    </a>
+                </div>
+            </nav>
+    <div class="main">
+
+        <!-- also navbar -->
+
+        <nav id="footer" class="navbar navbar-light bg-light fixed-bottom justify-content-between" style="height: 60px">
+            <div id="footer">WhiteBoard Entertainment
+            <br><br>Bakcsa Bálint, Gál Ágnes, Lisztes Alex, Vlasics Tibor</div>
+        </nav>
+    </div>
+
+    <div class="jumbotron">
+      <h1 class="display-3" align="center">Welcome to the WhiteBoard Entertainment world</h1><br>
+      <p class="lead" align="justify">This is a our revolutionary platform to help you in the task management. It will be your favorite helper, if you would like to stay with us. An abstraction ladder needs to make routine management philosophy more effective. You need to reconfigure client-centric portals completely. The corrective co-operations must be synchronized in a professional manner. The more powerful the development of effective criteria.</p>
+      <p class="lead"><br>
+        <a class="btn btn-primary btn-lg" href="/boards" role="button">ENTER</a>
+      </p>
+    </div>
+
+
     </body>
 </html>

@@ -1,6 +1,7 @@
 // It uses data_handler.js to visualize elements
 DOM = {
     openedBoardId: null,
+    drake: null,
 
     Constants: {
         MODAL_CONTAINER_ID: Templates.Constants.HTMLPrefixes.MODAL + 'container',
@@ -11,6 +12,24 @@ DOM = {
             CREATE_BOARD: Templates.Constants.HTMLPrefixes.MODAL + 'create-board',
             CREATE_CARD: Templates.Constants.HTMLPrefixes.MODAL + 'create-card',
             EDIT_CARD: Templates.Constants.HTMLPrefixes.MODAL + 'edit-card',
+        }
+    },
+
+    Dragula: {
+        _drake: null,
+
+        _convertElementArray: (unconvertedArray) => Array.prototype.slice.call(unconvertedArray),
+
+        addListener: function (type, callback) {
+            DOM.Dragula._drake.on(type, callback);
+        },
+
+        refresh(elementArray, dropCallback) {
+            if (DOM.Dragula._drake !== null) {
+                DOM.Dragula._drake.destroy();
+            }
+
+            DOM.Dragula._drake = dragula({ containers: DOM.Dragula._convertElementArray(elementArray) });
         }
     },
 
@@ -34,7 +53,16 @@ DOM = {
         },
     },
 
-    
+
+    compareCardOrders: function(cardA, cardB) {
+        if (cardA.order < cardB.order)
+            return -1;
+        if (cardA.order > cardB.order)
+            return 1;
+        return 0;
+    },
+
+
     showBoard: function(board) {
         let cardsByBoard = DataHandler.getCardsByBoardId(board.id);
         let statuses = DataHandler.getStatuses();
@@ -50,7 +78,7 @@ DOM = {
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
             if (cardsByBoard !== undefined) {
-                let cardsForCurrentStatus = cardsByBoard[statuses[i].id];
+                let cardsForCurrentStatus = cardsByBoard[statuses[i].id].sort(DOM.compareCardOrders);
 
                 for (let j = 0; j < cardsForCurrentStatus.length; j++) {
                     let currentCard = cardsForCurrentStatus[j];
@@ -58,9 +86,10 @@ DOM = {
                 }
             }
         }
-        let arrayLike = document.getElementsByClassName('column-body');
-        let containers = Array.prototype.slice.call(arrayLike);
-        let drake = dragula({ containers: containers });
+        DOM.Dragula.refresh(document.getElementsByClassName('column-body'));
+        DOM.Dragula.addListener('drop', function(element) {
+            DataHandler.sortCards(element.parentNode.id);
+        });
     },
 
 
@@ -82,6 +111,11 @@ DOM = {
 
     showNavbar: function() {
         document.getElementById(DOM.Constants.MAIN_DIV_ID).appendChild(Templates.createHTMLElementFromString(Templates.navbarTemplate()));
+    },
+
+
+    showFooter: function() {
+        document.getElementById(DOM.Constants.MAIN_DIV_ID).appendChild(Templates.createHTMLElementFromString(Templates.footerTemplate()));
     },
 
 
@@ -107,5 +141,6 @@ DOM = {
         Listeners.assignCreateBoardListener();
 
         DOM.showBoards();
+        DOM.showFooter();
     }
 };
