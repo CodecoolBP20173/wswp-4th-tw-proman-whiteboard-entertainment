@@ -36,12 +36,12 @@ Templates = {
             <div>
               <a class="navbar-brand" href="#">
                   <img src="https://static.ezgif.com/images/bg-transparent.gif" width="60" height="60"  alt="" style="vertical-align: top; display: inline-block" >
-                  <h1 style="vertical-align: bottom; display: inline-block">ProMan</h1>
+                  <h1 style="vertical-align: bottom; display: inline-block">Pro-Man</h1>
                             
                </a>
             </div>
             <div>
-                  <button type="button" id="${DOM.Constants.CREATE_BOARD_BUTTON_ID}" class="btn btn-primary" data-toggle="modal" data-target="#${DOM.Constants.ModalIDs.CREATE_BOARD}" style="display: inline-block;">Add new board</button>
+                  <button type="button" id="${DOM.Constants.CREATE_BOARD_BUTTON_ID}" class="btn btn-primary" data-toggle="modal" data-target="#${DOM.Constants.ModalIDs.CREATE_BOARD}" style="display: inline-block;">New Board</button>
             </div>
         </nav>
         `);
@@ -81,8 +81,8 @@ Templates = {
                             </h5>
                         </div>
                         <div class="col justify-content-center">
-                            <div class="card_options justify-content-center" id="heading-${board.id}-options">
-                                <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden; font-size: 24px;  color:#595F63" class="fa fa-plus"></i>
+                            <div class="card_options justify-content-center align-middle" id="heading-${board.id}-options">
+                                <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden; font-size: 24px;  color:#595F63" class="fa fa-plus align-middle"></i>
                             </div>
                         </div>
                     </div>
