@@ -15,6 +15,24 @@ DOM = {
         }
     },
 
+    Dragula: {
+        _drake: null,
+
+        _convertElementArray:  (unconvertedArray) => Array.prototype.slice.call(unconvertedArray),
+
+        addListener: function (type, callback) {
+            DOM.Dragula._drake.on(type, callback);
+        },
+
+        refresh(elementArray, dropCallback) {
+            if (DOM.Dragula._drake !== null) {
+                DOM.Dragula._drake.destroy();
+            }
+
+            DOM.drake = dragula({ containers: DOM.Dragula._convertElementArray(elementArray) });
+        }
+    },
+
     Modals: {
         create: function (title, inputLabel, inputValue, confirmButtonLabel, closeButtonLabel, modalId) {
             let modalContainer = document.getElementById(DOM.Constants.MODAL_CONTAINER_ID);
@@ -59,12 +77,10 @@ DOM = {
                 }
             }
         }
-        let arrayLike = document.getElementsByClassName('column-body');
-        let containers = Array.prototype.slice.call(arrayLike);
-        if (DOM.drake != null) {
-            DOM.drake.destroy();
-        }
-        DOM.drake = dragula({ containers: containers });
+        DOM.Dragula.refresh(document.getElementsByClassName('column-body'));
+        DOM.Dragula.addListener('drop', function(element) {
+
+        });
     },
 
 
