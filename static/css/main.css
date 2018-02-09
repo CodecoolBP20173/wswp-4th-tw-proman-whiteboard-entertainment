@@ -18,6 +18,11 @@
     background: white;
 }
 
+.fa-plus {
+    vertical-align: middle;
+    float: right;
+}
+
 #boards {
     background-color: green;
 }
