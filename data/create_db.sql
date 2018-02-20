@@ -34,6 +34,8 @@ CREATE TABLE public.cards
     id SERIAL PRIMARY KEY NOT NULL,
     board_id INT NOT NULL,
     title VARCHAR NOT NULL,
+    status VARCHAR NOT NULL,
+    "order" INT NOT NULL,
     CONSTRAINT cards_boards_id_fk FOREIGN KEY (id) REFERENCES boards (id)
 );
 CREATE UNIQUE INDEX cards_id_uindex ON public.cards (id);
