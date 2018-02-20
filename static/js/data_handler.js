@@ -71,7 +71,17 @@ DataHandler = {
     },
 
 
-    getBoards: () => DataHandler._data.boards,
+    getBoards: function(callback){
+        $.ajax({
+            dataType: "json",
+            url: "/get-board",
+            success: (function(data) {
+                for (let row of data) {
+                    callback(row);
+                }
+            })
+        })
+    },
 
 
     getBoard: function(boardId, callback) {

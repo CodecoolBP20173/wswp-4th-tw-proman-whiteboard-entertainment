@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import data_manager
+import json
 app = Flask(__name__)
 
 STATUSES = ['new', 'in progress', 'testing', 'done']
@@ -26,6 +27,11 @@ def add_new_board():
     data_manager.add_new_board(user_id, board_title, favourite, background_image)
     return "ok"
 
+@app.route("/get-board", methods=['get'])
+def get_board():
+    boards = data_manager.get_all_board_to_a_user(1)
+    return json.dumps(boards)
+
 
 @app.route("/new-card", methods=['POST'])
 def add_new_card():
@@ -39,7 +45,7 @@ def add_new_card():
 
 
 def main():
-    app.run(debug=True)
+    app.run(debug=True, port=8002)
 
 if __name__ == '__main__':
     main()

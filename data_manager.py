@@ -10,6 +10,35 @@ def add_new_board(cursor, user_id, board_title, favourite, background_image):
 
 
 @database_common.connection_handler
+def get_board(cursor, user_id, board_id):
+    cursor.execute("""
+                    SELECT title, favourite, background_image from boards
+                    WHERE user_id = %(user_id)s
+                    AND board_id = %(board_id)s
+                   """,
+                   {'user_id': user_id, 'board_id': board_id});
+    board_datas = cursor.fetchall()
+
+    return board_datas
+
+
+@database_common.connection_handler
+def get_all_board_to_a_user(cursor, user_id):
+    cursor.execute("""
+                    SELECT title, favourite, background_image from boards
+                    WHERE user_id = %(user_id)s
+                   """,
+                   {'user_id': user_id});
+    boards_datas = cursor.fetchall()
+
+    return boards_datas
+
+
+
+
+
+
+@database_common.connection_handler
 def add_new_card(cursor, board_id, title, status, order):
     cursor.execute("""
                     INSERT INTO cards(board_id, title, status, "order")
