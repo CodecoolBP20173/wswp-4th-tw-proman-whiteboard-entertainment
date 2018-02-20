@@ -94,7 +94,7 @@ DOM = {
 
 
     showBoards: function () {
-        let boards = DataHandler.getBoards();
+
         if (boards !== undefined && boards.length > 0) {
             for (let i = 0; i < boards.length; i++) {
                 DOM.showBoard(boards[i]);

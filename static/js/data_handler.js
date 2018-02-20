@@ -141,7 +141,6 @@ DataHandler = {
             "title": boardTitle,
             "is_active": true,
         };
-
         $.ajax({
           type: "POST",
           url: "/new-board",
@@ -149,7 +148,6 @@ DataHandler = {
           success: callback(board),
           dataType: "json"
         });
-
     },
 
 
@@ -163,12 +161,14 @@ DataHandler = {
             "title": cardTitle,
             "board_id": boardId,
             "status_id": statusId,
-            "order": order
         };
-        DataHandler._data.cards.push(card);
-        DataHandler._saveData();
-
-        callback(card);
+        $.ajax({
+            type: "POST",
+            url: '/new-card',
+            data: card,
+            success: callback(card),
+            dataType: "json"
+        });
     },
 
 
