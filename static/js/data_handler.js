@@ -141,10 +141,15 @@ DataHandler = {
             "title": boardTitle,
             "is_active": true,
         };
-        DataHandler._data.boards.push(board);
-        DataHandler._saveData();
 
-        callback(board);
+        $.ajax({
+          type: "POST",
+          url: "/new-board",
+          data: board,
+          success: callback(board),
+          dataType: "json"
+        });
+
     },
 
 
