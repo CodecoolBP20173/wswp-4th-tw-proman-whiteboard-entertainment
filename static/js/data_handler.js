@@ -145,17 +145,16 @@ DataHandler = {
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
         // callback is the showBoard from the dom module
-        let newID = (DataHandler._data.boards)? DataHandler._data.boards.length + 1 : 1;
         let board = {
-            "id": newID,
             "title": boardTitle,
-            "is_active": true,
         };
         $.ajax({
           type: "POST",
           url: "/new-board",
           data: board,
-          success: callback(board),
+          success: (function(newBoard) {
+              callback(newBoard);
+          }),
           dataType: "json"
         });
     },
@@ -163,11 +162,7 @@ DataHandler = {
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-
-        let id = DataHandler._data.cards.length + 1;
-        let order = DataHandler.getCardsByBoardId(boardId)[statusId].length + 1;
         let card = {
-            "id": id,
             "title": cardTitle,
             "board_id": boardId,
             "status_id": statusId,

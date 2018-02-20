@@ -4,9 +4,12 @@ import database_common
 def add_new_board(cursor, user_id, board_title, favourite, background_image):
     cursor.execute("""
                     INSERT INTO boards(user_id, title, favourite, background_image) 
-                    VALUES(%(user_id)s, %(title)s, %(favourite)s, %(background_image)s);
+                    VALUES(%(user_id)s, %(title)s, %(favourite)s, %(background_image)s)
+                    RETURNING *;
                    """,
                    {'user_id': user_id, 'title': board_title, 'favourite':favourite, 'background_image': background_image})
+    board = cursor.fetchone()
+    return board
 
 
 @database_common.connection_handler
@@ -25,7 +28,7 @@ def get_board(cursor, user_id, board_id):
 @database_common.connection_handler
 def get_all_board_to_a_user(cursor, user_id):
     cursor.execute("""
-                    SELECT title, favourite, background_image from boards
+                    SELECT id, title, favourite, background_image from boards
                     WHERE user_id = %(user_id)s
                    """,
                    {'user_id': user_id});
