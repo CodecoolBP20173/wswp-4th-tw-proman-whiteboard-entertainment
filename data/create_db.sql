@@ -24,7 +24,7 @@ CREATE TABLE public.boards
     title VARCHAR NOT NULL,
     favourite BOOLEAN NOT NULL,
     background_image VARCHAR,
-    CONSTRAINT boards_users_id_fk FOREIGN KEY (id) REFERENCES users (id)
+    CONSTRAINT boards_users_id_fk FOREIGN KEY (user_id) REFERENCES users (id)
 );
 CREATE UNIQUE INDEX boards_id_uindex ON public.boards (id);
 
@@ -36,6 +36,8 @@ CREATE TABLE public.cards
     title VARCHAR NOT NULL,
     status VARCHAR NOT NULL,
     "order" INT NOT NULL,
-    CONSTRAINT cards_boards_id_fk FOREIGN KEY (id) REFERENCES boards (id)
+    CONSTRAINT cards_boards_id_fk FOREIGN KEY (board_id) REFERENCES boards (id)
 );
 CREATE UNIQUE INDEX cards_id_uindex ON public.cards (id);
+
+INSERT INTO users (name, password, image, email) VALUES ('admin', 'admin', 'me.png', 'admin@proman.com');
