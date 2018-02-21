@@ -78,7 +78,7 @@ DOM = {
         for (let i = 0; i < statuses.length; i++) {
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
-            if (cardsByBoard !== undefined) {
+            if (cardsByBoard[i] !== []) {
                 let cardsForCurrentStatus = board.cards[i];
 
                 for (let j = 0; j < cardsForCurrentStatus.length; j++) {
