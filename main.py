@@ -4,8 +4,6 @@ import json
 
 app = Flask(__name__)
 
-STATUSES = {1: 'New', 2: 'In progress', 3: 'Testing', 4: 'Done'}
-
 
 @app.route("/")
 def main():
@@ -30,9 +28,23 @@ def add_new_board():
     return json.dumps(board)
 
 
+def get_cards(board_id):
+
+    new_cards = data_manager.get_cards_by_board_id_and_status(board_id, 1)
+    in_progress_cards = data_manager.get_cards_by_board_id_and_status(board_id, 2)
+    testing_cards = data_manager.get_cards_by_board_id_and_status(board_id, 3)
+    done_cards = data_manager.get_cards_by_board_id_and_status(board_id, 4)
+
+    cards = [new_cards, in_progress_cards, done_cards, testing_cards]
+    return cards
+
+
 @app.route("/get-board", methods=['get'])
 def get_board():
     boards = data_manager.get_all_board_to_a_user(1)
+    for board in boards:
+        board["cards"] = get_cards(board['id'])
+
     return json.dumps(boards)
 
 
@@ -40,7 +52,7 @@ def get_board():
 def add_new_card():
     board_id = request.form['board_id']
     title = request.form['title']
-    status = STATUSES[int(request.form['status_id'])]
+    status = request.form['status_id']
     number_of_cards_in_status = data_manager.get_the_number_of_cards_in_a_distinct_board_with_a_distinct_status(
         board_id, status)
     card_order_number = number_of_cards_in_status['number'] + 1

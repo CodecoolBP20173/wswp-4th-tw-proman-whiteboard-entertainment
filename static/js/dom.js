@@ -78,7 +78,7 @@ DOM = {
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
             if (cardsByBoard !== undefined) {
-                let cardsForCurrentStatus = cardsByBoard[statuses[i].id].sort(DOM.compareCardOrders);
+                let cardsForCurrentStatus = board.cards[i];
 
                 for (let j = 0; j < cardsForCurrentStatus.length; j++) {
                     let currentCard = cardsForCurrentStatus[j];

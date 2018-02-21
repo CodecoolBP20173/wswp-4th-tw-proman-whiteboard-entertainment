@@ -138,8 +138,7 @@ DataHandler = {
             }
         }
         return null;
-    }
-    ,
+    },
 
 
     createNewBoard: function(boardTitle, callback) {
