@@ -35,7 +35,7 @@ def get_cards(board_id):
     testing_cards = data_manager.get_cards_by_board_id_and_status(board_id, 3)
     done_cards = data_manager.get_cards_by_board_id_and_status(board_id, 4)
 
-    cards = [new_cards, in_progress_cards, done_cards, testing_cards]
+    cards = [new_cards, in_progress_cards, testing_cards, done_cards]
     return cards
 
 
