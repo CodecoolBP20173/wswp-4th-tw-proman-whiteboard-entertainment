@@ -34,7 +34,7 @@ CREATE TABLE public.cards
     id SERIAL PRIMARY KEY NOT NULL,
     board_id INT NOT NULL,
     title VARCHAR NOT NULL,
-    status VARCHAR NOT NULL,
+    status_id INT NOT NULL,
     "order" INT NOT NULL,
     CONSTRAINT cards_boards_id_fk FOREIGN KEY (board_id) REFERENCES boards (id)
 );
