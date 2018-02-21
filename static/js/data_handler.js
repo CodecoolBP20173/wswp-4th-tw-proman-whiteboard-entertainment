@@ -159,6 +159,14 @@ DataHandler = {
         });
     },
 
+    editBoard: function(boardId, title) {
+        $.ajax({
+              type: "POST",
+              url: "/edit-board",
+              data: {'id': boardId, 'title': title},
+              dataType: "json"
+        });
+    },
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
@@ -210,3 +218,4 @@ DataHandler = {
         DataHandler._saveData();
     }
 };
+
