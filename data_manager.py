@@ -36,6 +36,15 @@ def get_all_board_to_a_user(cursor, user_id):
 
     return boards_datas
 
+@database_common.connection_handler
+def edit_board(cursor, board_id, new_title):
+    cursor.execute("""
+                    UPDATE boards
+                    SET title = %(new_title)s
+                    WHERE id = %(id)s;
+                   """,
+                   {'id': board_id, 'new_title': new_title});
+
 
 @database_common.connection_handler
 def get_cards_by_board_id_and_status(cursor, board_id, status_id):

@@ -59,6 +59,13 @@ def add_new_card():
     data_manager.add_new_card(board_id, title, status, card_order_number)
     return "ok"
 
+@app.route("/edit-board", methods=['POST'])
+def edit_board():
+    board_id = request.form["id"]
+    new_title = request.form["title"]
+    data_manager.edit_board(board_id, new_title)
+    return "ok"
+
 
 def main():
     app.run(debug=True, port=8002)

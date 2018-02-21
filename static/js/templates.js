@@ -75,14 +75,17 @@ Templates = {
                     <div class="row">
                         <div class="col-10">
                             <h5 class="mb-0">
-                            <button class="btn button-box" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
+                            <button class="btn button-box" id="${Templates.Constants.HTMLPrefixes.BOARD_ID + board.id}-title" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
                               ${board.title}
                             </button>
                             </h5>
                         </div>
                         <div class="col justify-content-center">
                             <div class="card_options justify-content-center align-middle" id="heading-${board.id}-options">
-                                <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden; font-size: 24px;  color:#595F63" class="fa fa-plus align-middle"></i>
+                                <div>
+                                    <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden; font-size: 24px;  color:#595F63" class="fa fa-plus align-middle"></i>
+                                    <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-edit-board" class="fa fa-pencil" style="visibility: hidden; font-size: 24px;  color:#595F63"></i>
+                                </div>
                             </div>
                         </div>
                     </div>

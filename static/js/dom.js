@@ -12,6 +12,7 @@ DOM = {
             CREATE_BOARD: Templates.Constants.HTMLPrefixes.MODAL + 'create-board',
             CREATE_CARD: Templates.Constants.HTMLPrefixes.MODAL + 'create-card',
             EDIT_CARD: Templates.Constants.HTMLPrefixes.MODAL + 'edit-card',
+            EDIT_BOARD: Templates.Constants.HTMLPrefixes.MODAL + 'edit-board',
         }
     },
 
@@ -140,6 +141,7 @@ DOM = {
         DOM.Modals.create('Create new board', 'Board title:', '', 'Create board', 'Cancel', DOM.Constants.ModalIDs.CREATE_BOARD);
         DOM.Modals.create('Add new card', 'Card title:', '', 'Add card', 'Cancel', DOM.Constants.ModalIDs.CREATE_CARD);
         DOM.Modals.create('Edit card', 'Card title:', '', 'Edit card', 'Cancel', DOM.Constants.ModalIDs.EDIT_CARD);
+        DOM.Modals.create('Edit board', 'Board title', '', 'Edit board', 'Cancel', DOM.Constants.ModalIDs.EDIT_BOARD);
         Listeners.assignCreateBoardListener();
 
         DOM.showBoards();
