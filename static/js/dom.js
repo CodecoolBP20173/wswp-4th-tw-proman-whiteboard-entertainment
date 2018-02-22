@@ -106,7 +106,7 @@ DOM = {
 
 
     updateCardTitle: function(card, title) {
-        let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.CARD_ID + card.id);
+        let cardElement = document.getElementsByClassName('card-' + card.id + ' ' + Templates.Constants.HTMLPrefixes.CARD_ID + 'body')[0];
         cardElement.innerText = title;
     },
 
