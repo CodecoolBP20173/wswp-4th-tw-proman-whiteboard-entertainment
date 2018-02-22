@@ -6,12 +6,18 @@ Listeners = {
 
         currentBoard.addEventListener('mouseenter', function() {
             let buttonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-create-card';
+            let editButtonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-edit-board';
             document.getElementById(buttonId).style.visibility = 'visible';
+            document.getElementById(editButtonId).style.visibility = 'visible';
+
         });
 
         currentBoard.addEventListener('mouseleave', function() {
             let buttonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-create-card';
+            let editButtonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-edit-board';
             document.getElementById(buttonId).style.visibility = 'hidden';
+            document.getElementById(editButtonId).style.visibility = 'hidden';
+
         });
 
         let buttonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-create-card';
@@ -25,6 +31,19 @@ Listeners = {
             DOM.Modals.setInputValue(DOM.Constants.ModalIDs.CREATE_CARD, '');
             $('#' + DOM.Constants.ModalIDs.CREATE_CARD).modal('show');
         });
+
+        let editButtonId = Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-edit-board';
+        document.getElementById(editButtonId).addEventListener('click', function () {
+            DOM.Modals.setConfirmationEvent(DOM.Constants.ModalIDs.EDIT_BOARD, function () {
+                let title = DOM.Modals.getInputValue(DOM.Constants.ModalIDs.EDIT_BOARD);
+                DataHandler.editBoard(board.id, title);
+                $('#' + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-title')[0].innerHTML = title;
+            });
+
+            let boardTitle = $('#' + Templates.Constants.HTMLPrefixes.BOARD_ID + board.id + '-title')[0].innerText;
+            DOM.Modals.setInputValue(DOM.Constants.ModalIDs.EDIT_BOARD, boardTitle);
+            $('#' + DOM.Constants.ModalIDs.EDIT_BOARD).modal('show');
+        })
     },
 
 
@@ -41,14 +60,15 @@ Listeners = {
 
 
     assignEditCardListener: function(card) {
-        let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.CARD_ID + card.id);
+        let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.CARD_ID + card.id + '-edit-card');
 
         cardElement.addEventListener('click', function() {
-            DOM.Modals.setInputValue(DOM.Constants.ModalIDs.EDIT_CARD, card.title);
+            let cardTitle = document.getElementById(Templates.Constants.HTMLPrefixes.CARD_ID + card.id).innerText;
+            DOM.Modals.setInputValue(DOM.Constants.ModalIDs.EDIT_CARD, cardTitle);
 
             DOM.Modals.setConfirmationEvent(DOM.Constants.ModalIDs.EDIT_CARD, function () {
                 let title = DOM.Modals.getInputValue(DOM.Constants.ModalIDs.EDIT_CARD);
-                DataHandler.updateCard(card, title, DOM.updateCardTitle);
+                DataHandler.editCard(card, title, DOM.updateCardTitle);
             });
 
             $('#' + DOM.Constants.ModalIDs.EDIT_CARD).modal('show');

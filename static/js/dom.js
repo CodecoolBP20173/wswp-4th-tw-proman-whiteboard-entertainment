@@ -12,6 +12,7 @@ DOM = {
             CREATE_BOARD: Templates.Constants.HTMLPrefixes.MODAL + 'create-board',
             CREATE_CARD: Templates.Constants.HTMLPrefixes.MODAL + 'create-card',
             EDIT_CARD: Templates.Constants.HTMLPrefixes.MODAL + 'edit-card',
+            EDIT_BOARD: Templates.Constants.HTMLPrefixes.MODAL + 'edit-board',
         }
     },
 
@@ -64,7 +65,6 @@ DOM = {
 
 
     showBoard: function(board) {
-        let cardsByBoard = DataHandler.getCardsByBoardId(board.id);
         let statuses = DataHandler.getStatuses();
         let boardHTML = Templates.boardTemplate(board);
         let container = document.getElementById('accordion');
@@ -76,9 +76,9 @@ DOM = {
 
         for (let i = 0; i < statuses.length; i++) {
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
-            columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
-            if (cardsByBoard !== undefined) {
-                let cardsForCurrentStatus = cardsByBoard[statuses[i].id].sort(DOM.compareCardOrders);
+            columnContainer.appendChild(Templates.createHTMLElementFromString(columnHTML));
+            if (board.cards) {
+                let cardsForCurrentStatus = board.cards[i];
 
                 for (let j = 0; j < cardsForCurrentStatus.length; j++) {
                     let currentCard = cardsForCurrentStatus[j];
@@ -88,24 +88,26 @@ DOM = {
         }
         DOM.Dragula.refresh(document.getElementsByClassName('column-body'));
         DOM.Dragula.addListener('drop', function(element) {
-            DataHandler.sortCards(element.parentNode.id);
+            DataHandler.sortCards(element.parentNode.id, element.id);
         });
     },
 
 
     showBoards: function () {
+        /*
         let boards = DataHandler.getBoards();
         if (boards !== undefined && boards.length > 0) {
             for (let i = 0; i < boards.length; i++) {
                 DOM.showBoard(boards[i]);
             }
-        }
+        }*/
+        DataHandler.getBoards(DOM.showBoard);
     },
 
 
-    updateCardTitle: function(card) {
-        let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.CARD_ID + card.id);
-        cardElement.innerText = card.title;
+    updateCardTitle: function(card, title) {
+        let cardElement = document.getElementsByClassName('card-' + card.id + ' ' + Templates.Constants.HTMLPrefixes.CARD_ID + 'body')[0];
+        cardElement.innerText = title;
     },
 
 
@@ -138,6 +140,7 @@ DOM = {
         DOM.Modals.create('Create new board', 'Board title:', '', 'Create board', 'Cancel', DOM.Constants.ModalIDs.CREATE_BOARD);
         DOM.Modals.create('Add new card', 'Card title:', '', 'Add card', 'Cancel', DOM.Constants.ModalIDs.CREATE_CARD);
         DOM.Modals.create('Edit card', 'Card title:', '', 'Edit card', 'Cancel', DOM.Constants.ModalIDs.EDIT_CARD);
+        DOM.Modals.create('Edit board', 'Board title', '', 'Edit board', 'Cancel', DOM.Constants.ModalIDs.EDIT_BOARD);
         Listeners.assignCreateBoardListener();
 
         DOM.showBoards();

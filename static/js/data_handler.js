@@ -71,7 +71,17 @@ DataHandler = {
     },
 
 
-    getBoards: () => DataHandler._data.boards,
+    getBoards: function(callback){
+        $.ajax({
+            dataType: "json",
+            url: "/get-board",
+            success: (function(data) {
+                for (let row of data) {
+                    callback(row);
+                }
+            })
+        })
+    },
 
 
     getBoard: function(boardId, callback) {
@@ -81,7 +91,7 @@ DataHandler = {
 
     getStatuses: function() {
         // the statuses are retrieved and then the callback function is called with the statuses
-        return DataHandler._data.statuses;
+        return DataHandler.Constants.DEFAULT_DATA.statuses;
     },
 
 
@@ -128,75 +138,83 @@ DataHandler = {
             }
         }
         return null;
-    }
-    ,
+    },
 
 
     createNewBoard: function(boardTitle, callback) {
         // creates new board, saves it and calls the callback function with its data
         // callback is the showBoard from the dom module
-        let newID = (DataHandler._data.boards)? DataHandler._data.boards.length + 1 : 1;
         let board = {
-            "id": newID,
             "title": boardTitle,
-            "is_active": true,
         };
-        DataHandler._data.boards.push(board);
-        DataHandler._saveData();
-
-        callback(board);
+        $.ajax({
+          type: "POST",
+          url: "/new-board",
+          data: board,
+          success: (function(newBoard) {
+              callback(newBoard);
+          }),
+          dataType: "json"
+        });
     },
 
+    editBoard: function(boardId, title) {
+        $.ajax({
+              type: "POST",
+              url: "/edit-board",
+              data: {'id': boardId, 'title': title},
+              dataType: "json"
+        });
+    },
+
+     editCard: function(card, title, callback) {
+        $.ajax({
+              type: "POST",
+              url: "/edit-card",
+              data: {'id': card.id, 'title': title},
+              dataType: "json",
+              succes: callback(card, title)
+        });
+    },
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-
-        let id = DataHandler._data.cards.length + 1;
-        let order = DataHandler.getCardsByBoardId(boardId)[statusId].length + 1;
         let card = {
-            "id": id,
             "title": cardTitle,
             "board_id": boardId,
             "status_id": statusId,
-            "order": order
         };
-        DataHandler._data.cards.push(card);
-        DataHandler._saveData();
-
-        callback(card);
+        $.ajax({
+            type: "POST",
+            url: '/new-card',
+            data: card,
+            success: callback(card),
+            dataType: "json"
+        });
     },
 
 
-    updateCard: function(card, newTitle, callback) {
-        for (let currentCard of DataHandler._data.cards) {
-            if (currentCard.id === card.id) {
-                currentCard.title = newTitle;
+    sortCards: function(statusElementId, currentCardHTMLId) {
+        let cardColumnElement = document.getElementById(statusElementId);
+        let cardElementList = cardColumnElement.children;
+        let statusId = parseInt(cardColumnElement.dataset.statusId);
+        let cardId = parseInt(document.getElementById(currentCardHTMLId).dataset.cardId);
+
+        for (let i = 0; i < cardElementList.length; i++){
+            if (cardElementList[i].id === currentCardHTMLId) {
+                $.ajax({
+                    type: "POST",
+                    url: '/drop-card',
+                    data: {
+                        card_id: cardId,
+                        new_status_id: statusId,
+                        new_order: i + 1
+                    },
+                    dataType: "json"
+                });
                 break;
             }
         }
-        DataHandler._saveData();
-        callback(card);
-    },
-
-
-    sortCards: function(statusElementId) {
-        let cardColumnElement = document.getElementById(statusElementId);
-        let cardElementList = cardColumnElement.children;
-        let boardId = cardColumnElement.dataset.boardId;
-        let statusId = parseInt(cardColumnElement.dataset.statusId);
-
-        for (let i = 0; i < cardElementList.length; i++){
-            let card = DataHandler.getCard(parseInt(cardElementList[i].dataset.cardId));
-
-            if (card.order !== i + 1){
-                card.order = i + 1;
-            }
-            if (card.status_id !== statusId) {
-                DataHandler.sortCards(`${boardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${card.status_id}`);
-                card.status_id = statusId;
-            }
-
-        }
-        DataHandler._saveData();
     }
 };
+
