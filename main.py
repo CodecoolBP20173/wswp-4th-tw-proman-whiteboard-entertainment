@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, session, redirect
 import data_manager
 import json
 
@@ -28,18 +28,23 @@ def route_drop_event():
 
 @app.route("/boards")
 def boards():
-    ''' this is a one-pager which shows all the boards and cards '''
-    return render_template('boards.html')
+    name = session['name'] if 'name' in session else 'Anonymus'
+    if name != 'Anonymus':
+        image = data_manager.get_users_image(name)['image']
+        id = data_manager.get_id_by_username(name)['id']
+        return render_template("boards.html", name=name, image=image, id=id)
+    else:
+        return render_template('boards.html', name=name)
 
 
 @app.route("/new-board", methods=['POST'])
 def add_new_board():
-    user_id = request.form.get("user_id", 1)
+    user_id = session['id']
     board_title = request.form["title"]
     favourite = request.form.get("favourite", True)
     background_image = request.form.get("background_image",
                                         "https://images.pexels.com/photos/46710/pexels-photo-46710.jpeg?w=940&h=650&auto=compress&cs=tinysrgb")
-    board = data_manager.add_new_board(user_id, board_title, favourite, background_image)
+    board = data_manager.add_new_board(user_id['id'], board_title, favourite, background_image)
     return json.dumps(board)
 
 
@@ -56,7 +61,9 @@ def get_cards(board_id):
 
 @app.route("/get-board", methods=['get'])
 def get_board():
-    boards = data_manager.get_all_board_to_a_user(1)
+    user_id = session['id']
+    print(user_id)
+    boards = data_manager.get_all_board_to_a_user(user_id['id'])
     for board in boards:
         board["cards"] = get_cards(board['id'])
 
@@ -88,8 +95,63 @@ def edit_card():
     card_id = request.form["id"]
     new_card = request.form["title"]
     data_manager.edit_card(card_id, new_card)
-    print(new_card)
     return "ok"
+
+
+@app.route('/registration', methods=["GET", "POST"])
+def registration():
+    if request.method == 'GET':
+        return render_template("registration.html")
+    else:
+        name = request.form['name']
+        email = request.form['email']
+        every_username = data_manager.check_name_in_database(name)
+        every_email = data_manager.check_email_in_database(email)
+
+        if every_username is None and every_email is None:
+            image = request.form['image']
+            password = request.form['password']
+            email = request.form['email']
+            hashed_password = data_manager.hash_password(password)
+            if len(image) < 5:
+                data_manager.save_registration_without_image(name, hashed_password, email)
+                return render_template("main.html")
+            else:
+                data_manager.save_registration(name, hashed_password, image, email)
+                return render_template("main.html")
+        else:
+            return render_template('message.html', message='Username or e-mail is already taken', url=url_for('registration'))
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    username_check = request.form['name']
+    password_check_input = request.form['password']
+    username = data_manager.check_name_in_database(username_check)
+
+    if username is not None:
+        password_check_database = data_manager.get_users_password(username_check)['password']
+        verify = data_manager.verify_password(password_check_input, password_check_database)
+        if verify is True:
+            session['name'] = request.form['name']
+            name = session['name']
+            id = data_manager.get_id_by_username(name)
+            session['id'] = id
+            return render_template('message.html', message='Successful log in as {0}'.format(name), url=url_for('boards'))
+
+        else:
+            return render_template('message.html', message='You wrote wrong username or password', url=url_for('index'))
+    else:
+        return render_template('message.html', message='You wrote wrong username or password', url=url_for('index'))
+
+
+@app.route('/logout')
+def logout():
+    if 'name' not in session:
+        return render_template('message.html', message='You are not logged in, silly', url=url_for('login'))
+    else:
+        session.pop('name', None)
+        return render_template('message.html', message='Check out is successful', url=url_for('index'))
 
 
 def main():
@@ -97,4 +159,5 @@ def main():
 
 
 if __name__ == '__main__':
+    app.secret_key = 'ThorIsTheBest'
     main()
