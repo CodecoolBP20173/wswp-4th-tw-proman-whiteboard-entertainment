@@ -35,7 +35,7 @@
     <p align="center">Please fill in this form to create an account. If you already have an account you can <a href="/">log in</a>.</p>
     <p align="center"><i>Password should be at least six character length for your own security!</i></p>
 
-    <form action="/registration" method="POST" align="center">
+    <form action="{{ url_for('registration') }}" method="POST" align="center">
         <label><b>Username</b></label><br>
         <input type="text" placeholder="Enter Username" name="name" required>
 
