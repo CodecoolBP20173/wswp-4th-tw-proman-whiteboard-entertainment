@@ -26,7 +26,7 @@ Templates = {
                         <div class="card card-options" style="background: #eaf2f7" id="${card.id}-options">
                             <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}-edit-card" class="fa fa-pencil" style="visibility: visible; font-size: 24px;  color:#595F63"></i>
                         </div>
-                        <div class="card card-body">${card.title}</div>
+                        <div class="card-${card.id} card-body">${card.title}</div>
                     </div>`;
         return generatedCard;
     },
