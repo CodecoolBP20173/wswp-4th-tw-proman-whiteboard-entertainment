@@ -179,18 +179,24 @@ DataHandler = {
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-        let card = {
-            "title": cardTitle,
-            "board_id": boardId,
-            "status_id": statusId,
-        };
-        $.ajax({
-            type: "POST",
-            url: '/new-card',
-            data: card,
-            success: callback(card),
-            dataType: "json"
-        });
+        let newId = 0;
+        $.ajax({url:'/get-max-card-id', dataType:'json', success:(function (data) {
+                newId = data.id + 1;
+                let card = {
+                "id": newId,
+                "title": cardTitle,
+                "board_id": boardId,
+                "status_id": statusId,
+                };
+                $.ajax({
+                    type: "POST",
+                    url: '/new-card',
+                    data: card,
+                    success: callback(card),
+                    dataType: "json"
+                });
+            })});
+
     },
 
 

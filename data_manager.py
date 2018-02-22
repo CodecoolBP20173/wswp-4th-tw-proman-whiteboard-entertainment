@@ -85,6 +85,12 @@ def add_new_card(cursor, board_id, title, status_id, order):
 
 
 @database_common.connection_handler
+def get_max_card_id(cursor):
+    cursor.execute("""SELECT MAX(id) AS "id" FROM cards;""")
+    return cursor.fetchone()
+
+
+@database_common.connection_handler
 def get_the_number_of_cards_in_a_distinct_board_with_a_distinct_status(cursor, board_id, status_id):
     cursor.execute("""
                     SELECT COUNT(title) as number FROM cards

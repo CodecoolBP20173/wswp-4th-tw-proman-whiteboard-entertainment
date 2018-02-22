@@ -62,7 +62,6 @@ def get_cards(board_id):
 @app.route("/get-board", methods=['get'])
 def get_board():
     user_id = session['id']
-    print(user_id)
     boards = data_manager.get_all_board_to_a_user(user_id['id'])
     for board in boards:
         board["cards"] = get_cards(board['id'])
@@ -88,6 +87,11 @@ def add_new_card():
     card_order_number = number_of_cards_in_status['number'] + 1
     data_manager.add_new_card(board_id, title, status, card_order_number)
     return "ok"
+
+
+@app.route('/get-max-card-id')
+def max_card_id():
+    return json.dumps(data_manager.get_max_card_id())
 
 
 @app.route("/edit-card", methods=['POST'])
