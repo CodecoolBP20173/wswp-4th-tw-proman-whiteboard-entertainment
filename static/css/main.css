@@ -96,6 +96,10 @@ div[id$='column-4'] .card-body {
     background:#aabee6;
 }
 
+div[class$='card column'] {
+    min-height: 100px;
+}
+
 .jumbotron {
     width: 75%;
     margin: 0 auto;
