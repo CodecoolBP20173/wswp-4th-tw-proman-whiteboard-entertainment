@@ -61,15 +61,14 @@ Listeners = {
 
     assignEditCardListener: function(card) {
         let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.CARD_ID + card.id + '-edit-card');
-        console.log(cardElement);
 
         cardElement.addEventListener('click', function() {
-            DOM.Modals.setInputValue(DOM.Constants.ModalIDs.EDIT_CARD, card.title);
+            let cardTitle = document.getElementById(Templates.Constants.HTMLPrefixes.CARD_ID + card.id).innerText;
+            DOM.Modals.setInputValue(DOM.Constants.ModalIDs.EDIT_CARD, cardTitle);
 
             DOM.Modals.setConfirmationEvent(DOM.Constants.ModalIDs.EDIT_CARD, function () {
                 let title = DOM.Modals.getInputValue(DOM.Constants.ModalIDs.EDIT_CARD);
-                DataHandler.updateCard(card, title, DataHandler.editCard());
-                DOM.updateCardTitle(card)
+                DataHandler.editCard(card, title, DOM.updateCardTitle);
             });
 
             $('#' + DOM.Constants.ModalIDs.EDIT_CARD).modal('show');

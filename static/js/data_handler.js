@@ -167,12 +167,13 @@ DataHandler = {
         });
     },
 
-     editCard: function(cardId, title) {
+     editCard: function(card, title, callback) {
         $.ajax({
               type: "POST",
               url: "/edit-card",
-              data: {'id': cardId, 'title': title},
-              dataType: "json"
+              data: {'id': card.id, 'title': title},
+              dataType: "json",
+              succes: callback(card, title)
         });
     },
 
@@ -190,18 +191,6 @@ DataHandler = {
             success: callback(card),
             dataType: "json"
         });
-    },
-
-
-    updateCard: function(card, newTitle, callback) {
-        for (let currentCard of DataHandler._data.cards) {
-            if (currentCard.id === card.id) {
-                currentCard.title = newTitle;
-                break;
-            }
-        }
-        DataHandler._saveData();
-        callback(card);
     },
 
 

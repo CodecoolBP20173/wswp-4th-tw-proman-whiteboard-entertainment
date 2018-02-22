@@ -74,17 +74,11 @@ def add_new_card():
     return "ok"
 
 
-@app.route("/edit-board", methods=['POST'])
-def edit_board():
-    board_id = request.form["id"]
-    new_title = request.form["title"]
-    data_manager.edit_board(board_id, new_title)
-
 @app.route("/edit-card", methods=['POST'])
 def edit_card():
     card_id = request.form["id"]
     new_card = request.form["title"]
-    data_manager.edit_board(card_id, new_card)
+    data_manager.edit_card(card_id, new_card)
     print(new_card)
     return "ok"
 
