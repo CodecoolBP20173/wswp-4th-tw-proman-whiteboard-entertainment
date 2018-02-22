@@ -87,7 +87,7 @@ def add_new_card():
 def edit_card():
     card_id = request.form["id"]
     new_card = request.form["title"]
-    data_manager.edit_board(card_id, new_card)
+    data_manager.edit_card(card_id, new_card)
     print(new_card)
     return "ok"
 

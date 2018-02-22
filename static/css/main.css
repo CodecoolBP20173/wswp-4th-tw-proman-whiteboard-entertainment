@@ -76,6 +76,10 @@ body {
      opacity: 1;
  }
 
+div[class='card column'], div[class*='card board'] {
+    min-width: 200px;
+}
+
 div[id$='column-1'] .card-body {
     background:#dde5f5;
 }
@@ -109,6 +113,28 @@ div[id$='column-4'] .card-body {
     background: 0px;
     color: #05060B;
 }
+
+div[class*="card-options"] > i{
+    min-width: 10%;
+    width: 20%;
+    margin-left: 80%;
+    float: right; !important;
+}
+
+i {
+    min-width: 20%;
+}
+
+i:hover{
+    cursor: pointer;
+}
+
+i[id*="create-board"], i[id*="edit-board"] {
+    margin-right: 5%;
+    margin-left: 5%;
+    float: right;
+}
+
 
 /*ICON SET*/
 
