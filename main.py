@@ -11,6 +11,12 @@ def main():
     return render_template('main.html')
 
 
+@app.route("/drop-card", methods=['POST'])
+def route_drop_event():
+    ''' POST: card_id, new_status_id, card_id_behind, board_id '''
+    return render_template('main.html')
+
+
 @app.route("/boards")
 def boards():
     ''' this is a one-pager which shows all the boards and cards '''
@@ -68,6 +74,12 @@ def add_new_card():
     return "ok"
 
 
+@app.route("/edit-board", methods=['POST'])
+def edit_board():
+    board_id = request.form["id"]
+    new_title = request.form["title"]
+    data_manager.edit_board(board_id, new_title)
+
 @app.route("/edit-card", methods=['POST'])
 def edit_card():
     card_id = request.form["id"]
@@ -78,7 +90,7 @@ def edit_card():
 
 
 def main():
-    app.run(debug=True, port=8001)
+    app.run(debug=True, port=8002)
 
 
 if __name__ == '__main__':

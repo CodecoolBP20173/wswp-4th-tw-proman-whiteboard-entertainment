@@ -66,6 +66,14 @@ def get_cards_by_board_id_and_status(cursor, board_id, status_id):
 
 
 @database_common.connection_handler
+def get_card_details_by_id(cursor, card_id):
+    cursor.execute("""
+        SELECT * FROM cards WHERE id = %(card_id)s
+    """, {'card_id': card_id})
+    return cursor.fetchone()
+
+
+@database_common.connection_handler
 def add_new_card(cursor, board_id, title, status_id, order):
     cursor.execute("""
                     INSERT INTO cards(board_id, title, status_id, "order")
@@ -81,3 +89,25 @@ def get_the_number_of_cards_in_a_distinct_board_with_a_distinct_status(cursor, b
                     WHERE status_id = %(status_id)s AND board_id = %(board_id)s
                   """, {'status_id': status_id, 'board_id': board_id})
     return cursor.fetchone()
+
+
+@database_common.connection_handler
+def update_order(cursor, board_id, status_id, order, amount):
+    cursor.execute("""
+        UPDATE cards SET cards.order = cards.order + ({0})
+        WHERE cards.board_id = %(board_id)s AND cards.status_id = %(status_id)s AND cards.order > %(order)s  
+    """.format(amount), {'status_id': status_id, 'board_id': board_id, 'order': order})
+
+
+@database_common.connection_handler
+def update_card_status(cursor, card_id, new_status_id):
+    cursor.execute("""
+        UPDATE cards SET cards.status_id = %(status_id)s WHERE cards.id = %(card_id)s
+    """, {'status_id': new_status_id, 'card_id': card_id})
+
+
+@database_common.connection_handler
+def update_card_order(cursor, card_id, new_order):
+    cursor.execute("""
+        UPDATE cards SET cards.order = %(order)s WHERE cards.id = %(card_id)s
+    """, {'order': new_order, 'card_id': card_id})
