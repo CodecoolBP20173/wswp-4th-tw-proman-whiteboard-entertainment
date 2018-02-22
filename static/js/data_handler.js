@@ -84,60 +84,9 @@ DataHandler = {
     },
 
 
-    getBoard: function(boardId, callback) {
-        // the board is retrieved and then the callback function is called with the board
-    },
-
-
     getStatuses: function() {
         // the statuses are retrieved and then the callback function is called with the statuses
         return DataHandler.Constants.DEFAULT_DATA.statuses;
-    },
-
-
-    getStatus: function(statusId, callback) {
-        // the status is retrieved and then the callback function is called with the status
-    },
-
-
-    getCardsByBoardId: function(boardId) {
-        // the cards are retrieved and then the callback function is called with the cards
-        // get all of the card details connected to the specified board
-        // get statuses
-        // separate cards by status id and returns the object
-        /*
-            {
-                status1: [card1, card2]
-                ...
-            }
-        */
-        let cardsForStatuses = {};
-        let all_cards = DataHandler._data.cards;
-        let statuses = DataHandler.getStatuses();
-
-        for (let i = 0; i < statuses.length; i++) {
-            let key = statuses[i].id;
-            cardsForStatuses[key] = [];
-        }
-
-        for (let i = 0; i < all_cards.length; i++) {
-            if (all_cards[i].board_id === boardId) {
-                cardsForStatuses[all_cards[i].status_id].push(all_cards[i]);
-            }
-        }
-
-        return cardsForStatuses;
-    },
-
-
-
-    getCard: function(cardId) {
-        for (let currentCard of DataHandler._data.cards) {
-            if (currentCard.id === cardId) {
-                return currentCard;
-            }
-        }
-        return null;
     },
 
 
@@ -179,18 +128,24 @@ DataHandler = {
 
     createNewCard: function(cardTitle, boardId, statusId, callback) {
         // creates new card, saves it and calls the callback function with its data
-        let card = {
-            "title": cardTitle,
-            "board_id": boardId,
-            "status_id": statusId,
-        };
-        $.ajax({
-            type: "POST",
-            url: '/new-card',
-            data: card,
-            success: callback(card),
-            dataType: "json"
-        });
+        let newId = 0;
+        $.ajax({url:'/get-max-card-id', dataType:'json', success:(function (data) {
+                newId = data.id + 1;
+                let card = {
+                "id": newId,
+                "title": cardTitle,
+                "board_id": boardId,
+                "status_id": statusId,
+                };
+                $.ajax({
+                    type: "POST",
+                    url: '/new-card',
+                    data: card,
+                    success: callback(card),
+                    dataType: "json"
+                });
+            })});
+
     },
 
 

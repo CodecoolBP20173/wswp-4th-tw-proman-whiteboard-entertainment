@@ -55,15 +55,6 @@ DOM = {
     },
 
 
-    compareCardOrders: function(cardA, cardB) {
-        if (cardA.order < cardB.order)
-            return -1;
-        if (cardA.order > cardB.order)
-            return 1;
-        return 0;
-    },
-
-
     showBoard: function(board) {
         let statuses = DataHandler.getStatuses();
         let boardHTML = Templates.boardTemplate(board);
@@ -72,7 +63,7 @@ DOM = {
         node.innerHTML = boardHTML;
         container.appendChild(node);
         let columnContainer = document.getElementById(Templates.Constants.HTMLPrefixes.BOARD_ID + board.id);
-        Listeners.assignCreateCardListener(board);
+        Listeners.assignCreateCardAndEditBoardListener(board);
 
         for (let i = 0; i < statuses.length; i++) {
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
@@ -94,13 +85,6 @@ DOM = {
 
 
     showBoards: function () {
-        /*
-        let boards = DataHandler.getBoards();
-        if (boards !== undefined && boards.length > 0) {
-            for (let i = 0; i < boards.length; i++) {
-                DOM.showBoard(boards[i]);
-            }
-        }*/
         DataHandler.getBoards(DOM.showBoard);
     },
 

@@ -1,7 +1,7 @@
 Listeners = {
 
     // This function is to initialize the application
-    assignCreateCardListener: function(board) {
+    assignCreateCardAndEditBoardListener: function(board) {
         let currentBoard = document.getElementById(Templates.Constants.HTMLPrefixes.HEADING + board.id);
 
         currentBoard.addEventListener('mouseenter', function() {

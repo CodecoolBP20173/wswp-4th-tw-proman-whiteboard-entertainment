@@ -1,4 +1,5 @@
 import database_common
+import bcrypt
 
 @database_common.connection_handler
 def add_new_board(cursor, user_id, board_title, favourite, background_image):
@@ -84,6 +85,12 @@ def add_new_card(cursor, board_id, title, status_id, order):
 
 
 @database_common.connection_handler
+def get_max_card_id(cursor):
+    cursor.execute("""SELECT MAX(id) AS "id" FROM cards;""")
+    return cursor.fetchone()
+
+
+@database_common.connection_handler
 def get_the_number_of_cards_in_a_distinct_board_with_a_distinct_status(cursor, board_id, status_id):
     cursor.execute("""
                     SELECT COUNT(title) as number FROM cards
@@ -112,3 +119,90 @@ def update_card_order(cursor, card_id, new_order):
     cursor.execute("""
         UPDATE cards SET "order" = %(order)s WHERE id = %(card_id)s
     """, {'order': new_order, 'card_id': card_id})
+
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+
+@database_common.connection_handler
+def check_name_in_database(cursor, name):
+    cursor.execute("""
+                    SELECT name FROM users
+                    WHERE name = %(name)s;
+                   """,
+                   {'name': name})
+    user_name_search = cursor.fetchone()
+
+    return user_name_search
+
+@database_common.connection_handler
+def check_email_in_database(cursor, email):
+    cursor.execute("""
+                    SELECT email FROM users
+                    WHERE email = %(email)s;
+                   """,
+                   {'email': email})
+    every_email = cursor.fetchone()
+
+    return every_email
+
+
+
+@database_common.connection_handler
+def save_registration(cursor, name, password, image):
+    cursor.execute("""
+                    INSERT INTO users (name, password, image, email) 
+                    VALUES (%(name)s, %(password)s, %(image)s, %(email)s);
+                   """,
+                   {'name': name, 'password': password, 'image': image, 'email': email})
+
+
+@database_common.connection_handler
+def save_registration_without_image(cursor, name, password, email):
+    cursor.execute("""
+                    INSERT INTO users (name, password, email) 
+                    VALUES (%(name)s, %(password)s, %(email)s);
+                   """,
+                   {'name': name, 'password': password, 'email': email})
+
+@database_common.connection_handler
+def get_users_password(cursor, name):
+    cursor.execute("""
+                    SELECT password FROM users
+                    WHERE name = %(name)s;
+                   """,
+                   {'name': name})
+    password = cursor.fetchone()
+
+    return password
+
+@database_common.connection_handler
+def get_users_image(cursor, name):
+    cursor.execute("""
+                    SELECT image FROM users
+                    WHERE name = %(name)s;
+                   """,
+                   {'name': name})
+    image = cursor.fetchone()
+
+    return image
+
+@database_common.connection_handler
+def get_id_by_username(cursor, name):
+    cursor.execute("""
+                    SELECT id FROM users
+                    WHERE name = %(name)s;
+                    """,
+                   {'name': name})
+    id = cursor.fetchone()
+
+    return id
+
+
