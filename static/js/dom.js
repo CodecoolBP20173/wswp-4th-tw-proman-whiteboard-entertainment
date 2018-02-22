@@ -65,7 +65,6 @@ DOM = {
 
 
     showBoard: function(board) {
-        let cardsByBoard = DataHandler.getCardsByBoardId(board.id);
         let statuses = DataHandler.getStatuses();
         let boardHTML = Templates.boardTemplate(board);
         let container = document.getElementById('accordion');
@@ -78,7 +77,7 @@ DOM = {
         for (let i = 0; i < statuses.length; i++) {
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
             columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
-            if (cardsByBoard[i] !== []) {
+            if (board.cards) {
                 let cardsForCurrentStatus = board.cards[i];
 
                 for (let j = 0; j < cardsForCurrentStatus.length; j++) {
