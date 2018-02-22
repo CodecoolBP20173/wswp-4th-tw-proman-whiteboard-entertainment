@@ -205,25 +205,27 @@ DataHandler = {
     },
 
 
-    sortCards: function(statusElementId) {
+    sortCards: function(statusElementId, currentCardHTMLId) {
         let cardColumnElement = document.getElementById(statusElementId);
         let cardElementList = cardColumnElement.children;
-        let boardId = cardColumnElement.dataset.boardId;
         let statusId = parseInt(cardColumnElement.dataset.statusId);
+        let cardId = parseInt(document.getElementById(currentCardHTMLId).dataset.cardId);
 
         for (let i = 0; i < cardElementList.length; i++){
-            let card = DataHandler.getCard(parseInt(cardElementList[i].dataset.cardId));
-
-            if (card.order !== i + 1){
-                card.order = i + 1;
+            if (cardElementList[i].id === currentCardHTMLId) {
+                $.ajax({
+                    type: "POST",
+                    url: '/drop-card',
+                    data: {
+                        card_id: cardId,
+                        new_status_id: statusId,
+                        new_order: i + 1
+                    },
+                    dataType: "json"
+                });
+                break;
             }
-            if (card.status_id !== statusId) {
-                DataHandler.sortCards(`${boardId}-${Templates.Constants.HTMLPrefixes.STATUS_COLUMN_ID}${card.status_id}`);
-                card.status_id = statusId;
-            }
-
         }
-        DataHandler._saveData();
     }
 };
 

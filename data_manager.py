@@ -60,6 +60,7 @@ def get_cards_by_board_id_and_status(cursor, board_id, status_id):
     cursor.execute("""
                     SELECT * FROM cards
                     WHERE board_id = %(board_id)s AND status_id = %(status_id)s
+                    ORDER BY "order"
                     """,
                    {'board_id': board_id, 'status_id': status_id})
     return cursor.fetchall()
@@ -94,20 +95,20 @@ def get_the_number_of_cards_in_a_distinct_board_with_a_distinct_status(cursor, b
 @database_common.connection_handler
 def update_order(cursor, board_id, status_id, order, amount):
     cursor.execute("""
-        UPDATE cards SET cards.order = cards.order + ({0})
-        WHERE cards.board_id = %(board_id)s AND cards.status_id = %(status_id)s AND cards.order > %(order)s  
+        UPDATE cards SET "order" = "order" + ({0})
+        WHERE board_id = %(board_id)s AND status_id = %(status_id)s AND "order" >= %(order)s  
     """.format(amount), {'status_id': status_id, 'board_id': board_id, 'order': order})
 
 
 @database_common.connection_handler
 def update_card_status(cursor, card_id, new_status_id):
     cursor.execute("""
-        UPDATE cards SET cards.status_id = %(status_id)s WHERE cards.id = %(card_id)s
+        UPDATE cards SET status_id = %(status_id)s WHERE id = %(card_id)s
     """, {'status_id': new_status_id, 'card_id': card_id})
 
 
 @database_common.connection_handler
 def update_card_order(cursor, card_id, new_order):
     cursor.execute("""
-        UPDATE cards SET cards.order = %(order)s WHERE cards.id = %(card_id)s
+        UPDATE cards SET "order" = %(order)s WHERE id = %(card_id)s
     """, {'order': new_order, 'card_id': card_id})

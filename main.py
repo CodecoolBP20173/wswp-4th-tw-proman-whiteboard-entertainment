@@ -6,15 +6,24 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def main():
+def index():
     ''' this is a one-pager which shows all the boards and cards '''
     return render_template('main.html')
 
 
 @app.route("/drop-card", methods=['POST'])
 def route_drop_event():
-    ''' POST: card_id, new_status_id, card_id_behind, board_id '''
-    return render_template('main.html')
+    ''' POST: card_id, new_status_id, new_order'''
+    form_data = request.form
+    old_card_details = data_manager.get_card_details_by_id(form_data['card_id'])
+    data_manager.update_order(old_card_details['board_id'], form_data['new_status_id'], form_data['new_order'], 1)
+    data_manager.update_card_order(form_data['card_id'], form_data['new_order'])
+    data_manager.update_card_status(form_data['card_id'], form_data['new_status_id'])
+
+    if form_data['new_status_id'] != old_card_details['status_id']:
+        data_manager.update_order(old_card_details['board_id'], old_card_details['status_id'], old_card_details['order'], -1)
+
+    return 'ok'
 
 
 @app.route("/boards")
@@ -73,12 +82,6 @@ def add_new_card():
     data_manager.add_new_card(board_id, title, status, card_order_number)
     return "ok"
 
-
-@app.route("/edit-board", methods=['POST'])
-def edit_board():
-    board_id = request.form["id"]
-    new_title = request.form["title"]
-    data_manager.edit_board(board_id, new_title)
 
 @app.route("/edit-card", methods=['POST'])
 def edit_card():

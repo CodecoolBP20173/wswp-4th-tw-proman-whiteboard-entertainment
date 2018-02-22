@@ -88,7 +88,7 @@ DOM = {
         }
         DOM.Dragula.refresh(document.getElementsByClassName('column-body'));
         DOM.Dragula.addListener('drop', function(element) {
-            DataHandler.sortCards(element.parentNode.id);
+            DataHandler.sortCards(element.parentNode.id, element.id);
         });
     },
 
