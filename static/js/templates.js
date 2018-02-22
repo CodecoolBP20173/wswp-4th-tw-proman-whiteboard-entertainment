@@ -45,7 +45,7 @@ Templates = {
             </div>
             <div>
                   <button type="button" id="${DOM.Constants.CREATE_BOARD_BUTTON_ID}" class="btn btn-primary" data-toggle="modal" data-target="#${DOM.Constants.ModalIDs.CREATE_BOARD}" style="display: inline-block;">New Board</button>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" align="right" style="display: inline-block><a href="/logout">Log out</a></button>
+                  <a href="/logout" style="margin-left: 20px">Log out</a>
 
             </div>
         </nav>
