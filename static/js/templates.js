@@ -118,7 +118,7 @@ Templates = {
                     <div class="modal-body">
                         <div class="form-group">
                         <label for="usr">${inputLabel}</label>
-                            <input type="text" class="form-control" id="${Templates.Constants.HTMLPrefixes.INPUT}${modalId}" value="${inputValue}" maxlength="15" >
+                            <input type="text" class="form-control" id="${Templates.Constants.HTMLPrefixes.INPUT}${modalId}" value="${inputValue}" maxlength="30" >
                         </div>
                     </div>
                     <div class="modal-footer" style="margin: 0 auto">
