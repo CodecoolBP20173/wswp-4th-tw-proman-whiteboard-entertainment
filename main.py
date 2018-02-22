@@ -3,6 +3,7 @@ import data_manager
 import json
 
 app = Flask(__name__)
+app.secret_key = 'ThorIsTheBest'
 
 
 @app.route("/")
@@ -163,5 +164,4 @@ def main():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'ThorIsTheBest'
     main()
