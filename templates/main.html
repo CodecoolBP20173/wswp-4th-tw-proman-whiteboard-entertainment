@@ -56,8 +56,23 @@
       <h1 class="display-3" align="center">Welcome to the WhiteBoard Entertainment world</h1><br>
       <p class="lead" align="justify">This is a our revolutionary platform to help you in the task management. It will be your favorite helper, if you would like to stay with us. An abstraction ladder needs to make routine management philosophy more effective. You need to reconfigure client-centric portals completely. The corrective co-operations must be synchronized in a professional manner. The more powerful the development of effective criteria.</p>
       <p class="lead"><br>
-        <a class="btn btn-primary btn-lg" href="/boards" role="button">ENTER</a>
-      </p>
+
+        <h1 align="center">Sign In</h1>
+
+        <form action="/login" method="POST" align="center"><br>
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="name" id="name" required><br>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="password" required><br>
+
+            <label>
+            <input type="checkbox" checked="checked" style="margin-bottom:15px"> Remember me
+            </label><br/>
+            <button type="submit">Enter</button>
+        </form>
+
+        <p align="center">If you have an account you can log in here, otherwise you can <a href="/registration">register</a>.</p>
     </div>
 
 
