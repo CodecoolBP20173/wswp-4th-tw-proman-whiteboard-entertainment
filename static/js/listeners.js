@@ -63,7 +63,7 @@ Listeners = {
         let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.CARD_ID + card.id + '-edit-card');
         console.log(cardElement);
 
-        cardElement.onclick = function() {
+        cardElement.addEventListener('click', function() {
             DOM.Modals.setInputValue(DOM.Constants.ModalIDs.EDIT_CARD, card.title);
 
             DOM.Modals.setConfirmationEvent(DOM.Constants.ModalIDs.EDIT_CARD, function () {
@@ -73,6 +73,6 @@ Listeners = {
             });
 
             $('#' + DOM.Constants.ModalIDs.EDIT_CARD).modal('show');
-        };
+        });
     }
 };

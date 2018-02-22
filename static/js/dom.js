@@ -76,7 +76,7 @@ DOM = {
 
         for (let i = 0; i < statuses.length; i++) {
             let columnHTML = Templates.columnTemplate(statuses[i], board.id);
-            columnContainer.innerHTML = columnContainer.innerHTML + columnHTML;
+            columnContainer.appendChild(Templates.createHTMLElementFromString(columnHTML));
             if (board.cards) {
                 let cardsForCurrentStatus = board.cards[i];
 
