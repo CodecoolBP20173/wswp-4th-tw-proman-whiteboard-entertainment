@@ -23,7 +23,11 @@ Templates = {
         let generatedCard;
         generatedCard = `
                     <div class="card card-default" style="margin: 20px" align="center" data-card-id="${card.id}">
-                        <div class="card-body" id="${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}">${card.title}</div>
+                        <div class="card card-options" style="background: #eaf2f7" id="${card.id}-options">
+                            <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}-edit-card" class="fa fa-pencil" style="visibility: visible; font-size: 24px;  color:#595F63"></i>
+                        </div>
+                        <div class="card card-body" id="${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}">${card.title}</div>
+
                     </div>`;
         return generatedCard;
     },

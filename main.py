@@ -48,6 +48,14 @@ def get_board():
     return json.dumps(boards)
 
 
+@app.route("/edit-board", methods=['POST'])
+def edit_board():
+    board_id = request.form["id"]
+    new_title = request.form["title"]
+    data_manager.edit_board(board_id, new_title)
+    return "ok"
+
+
 @app.route("/new-card", methods=['POST'])
 def add_new_card():
     board_id = request.form['board_id']
@@ -59,16 +67,18 @@ def add_new_card():
     data_manager.add_new_card(board_id, title, status, card_order_number)
     return "ok"
 
-@app.route("/edit-board", methods=['POST'])
-def edit_board():
-    board_id = request.form["id"]
-    new_title = request.form["title"]
-    data_manager.edit_board(board_id, new_title)
+
+@app.route("/edit-card", methods=['POST'])
+def edit_card():
+    card_id = request.form["id"]
+    new_card = request.form["title"]
+    data_manager.edit_board(card_id, new_card)
+    print(new_card)
     return "ok"
 
 
 def main():
-    app.run(debug=True, port=8002)
+    app.run(debug=True, port=8001)
 
 
 if __name__ == '__main__':

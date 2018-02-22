@@ -43,7 +43,16 @@ def edit_board(cursor, board_id, new_title):
                     SET title = %(new_title)s
                     WHERE id = %(id)s;
                    """,
-                   {'id': board_id, 'new_title': new_title});
+                   {'id': board_id, 'new_title': new_title})
+
+@database_common.connection_handler
+def edit_card(cursor, card_id, new_card):
+    cursor.execute("""
+                    UPDATE cards
+                    SET title = %(new_card)s
+                    WHERE id = %(id)s;
+                   """,
+                   {'id': card_id, 'new_card': new_card})
 
 
 @database_common.connection_handler

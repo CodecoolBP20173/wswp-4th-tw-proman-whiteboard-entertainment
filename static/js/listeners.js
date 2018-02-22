@@ -60,17 +60,19 @@ Listeners = {
 
 
     assignEditCardListener: function(card) {
-        let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.CARD_ID + card.id);
+        let cardElement = document.getElementById(Templates.Constants.HTMLPrefixes.BUTTON + Templates.Constants.HTMLPrefixes.CARD_ID + card.id + '-edit-card');
+        console.log(cardElement);
 
-        cardElement.addEventListener('click', function() {
+        cardElement.onclick = function() {
             DOM.Modals.setInputValue(DOM.Constants.ModalIDs.EDIT_CARD, card.title);
 
             DOM.Modals.setConfirmationEvent(DOM.Constants.ModalIDs.EDIT_CARD, function () {
                 let title = DOM.Modals.getInputValue(DOM.Constants.ModalIDs.EDIT_CARD);
-                DataHandler.updateCard(card, title, DOM.updateCardTitle);
+                DataHandler.updateCard(card, title, DataHandler.editCard());
+                DOM.updateCardTitle(card)
             });
 
             $('#' + DOM.Constants.ModalIDs.EDIT_CARD).modal('show');
-        });
+        };
     }
 };

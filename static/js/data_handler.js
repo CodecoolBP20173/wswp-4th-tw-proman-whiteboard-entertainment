@@ -91,7 +91,7 @@ DataHandler = {
 
     getStatuses: function() {
         // the statuses are retrieved and then the callback function is called with the statuses
-        return DataHandler._data.statuses;
+        return DataHandler.Constants.DEFAULT_DATA.statuses;
     },
 
 
@@ -163,6 +163,15 @@ DataHandler = {
               type: "POST",
               url: "/edit-board",
               data: {'id': boardId, 'title': title},
+              dataType: "json"
+        });
+    },
+
+     editCard: function(cardId, title) {
+        $.ajax({
+              type: "POST",
+              url: "/edit-card",
+              data: {'id': cardId, 'title': title},
               dataType: "json"
         });
     },
