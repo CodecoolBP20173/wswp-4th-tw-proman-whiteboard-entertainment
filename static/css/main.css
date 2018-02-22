@@ -105,6 +105,10 @@ div[class$='card column'] {
     margin: 0 auto;
 }
 
+.jumbotron > h1 {
+    font-size: 3em;
+}
+
 #footer {
     height: 20px;
     transition-duration: 0.3s;
