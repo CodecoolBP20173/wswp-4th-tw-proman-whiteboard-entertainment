@@ -1,6 +1,7 @@
-DROP TABLE IF EXISTS public.users;
-DROP TABLE IF EXISTS public.boards;
 DROP TABLE IF EXISTS public.cards;
+DROP TABLE IF EXISTS public.boards;
+DROP TABLE IF EXISTS public.users;
+
 
 
 CREATE TABLE public.users
@@ -40,4 +41,4 @@ CREATE TABLE public.cards
 );
 CREATE UNIQUE INDEX cards_id_uindex ON public.cards (id);
 
-INSERT INTO users (name, password, image, email) VALUES ('admin', 'admin', 'me.png', 'admin@proman.com');
+INSERT INTO users (name, password, image, email) VALUES ('admin', '$2y$10$XrZMUKwbiVwG9KyOzwMKouXwvxPmp1oFq0e70WwiUTjEJ2EFNSVKO', 'me.png', 'admin@proman.com');
