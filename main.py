@@ -34,7 +34,7 @@ def boards():
         id = data_manager.get_id_by_username(name)['id']
         return render_template("boards.html", name=name, image=image, id=id)
     else:
-        return render_template('boards.html', name=name)
+        return redirect('/')
 
 
 @app.route("/new-board", methods=['POST'])
