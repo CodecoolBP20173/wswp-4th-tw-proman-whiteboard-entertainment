@@ -22,8 +22,11 @@ Templates = {
     cardTemplate: function (card) {
         let generatedCard;
         generatedCard = `
-                    <div class="card card-default" style="margin: 20px" align="center" data-card-id="${card.id}">
-                        <div class="card-body" id="${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}">${card.title}</div>
+                    <div class="card card-default" id="${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}" style="margin: 20px" align="center" data-card-id="${card.id}">
+                        <div class="card card-options" style="background: #eaf2f7" id="${card.id}-options">
+                            <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.CARD_ID}${card.id}-edit-card" class="fa fa-pencil" style="visibility: visible; font-size: 24px;  color:#595F63"></i>
+                        </div>
+                        <div class="card-${card.id} card-body">${card.title}</div>
                     </div>`;
         return generatedCard;
     },
@@ -42,6 +45,8 @@ Templates = {
             </div>
             <div>
                   <button type="button" id="${DOM.Constants.CREATE_BOARD_BUTTON_ID}" class="btn btn-primary" data-toggle="modal" data-target="#${DOM.Constants.ModalIDs.CREATE_BOARD}" style="display: inline-block;">New Board</button>
+                  <a href="/logout" style="margin-left: 20px">Log out</a>
+
             </div>
         </nav>
         `);
@@ -75,14 +80,17 @@ Templates = {
                     <div class="row">
                         <div class="col-10">
                             <h5 class="mb-0">
-                            <button class="btn button-box" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
+                            <button class="btn button-box" id="${Templates.Constants.HTMLPrefixes.BOARD_ID + board.id}-title" data-toggle="collapse" data-target="#collapse${board.id}" aria-expanded="true" aria-controls="collapse${board.id}">
                               ${board.title}
                             </button>
                             </h5>
                         </div>
                         <div class="col justify-content-center">
                             <div class="card_options justify-content-center align-middle" id="heading-${board.id}-options">
-                                <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden; font-size: 24px;  color:#595F63" class="fa fa-plus align-middle"></i>
+                                <div>
+                                    <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-create-card" style="visibility: hidden; font-size: 24px;  color:#595F63" class="fa fa-plus align-middle"></i>
+                                    <i id="${Templates.Constants.HTMLPrefixes.BUTTON}${Templates.Constants.HTMLPrefixes.BOARD_ID}${board.id}-edit-board" class="fa fa-pencil" style="visibility: hidden; font-size: 24px;  color:#595F63"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -110,7 +118,7 @@ Templates = {
                     <div class="modal-body">
                         <div class="form-group">
                         <label for="usr">${inputLabel}</label>
-                            <input type="text" class="form-control" id="${Templates.Constants.HTMLPrefixes.INPUT}${modalId}" value="${inputValue}">
+                            <input type="text" class="form-control" id="${Templates.Constants.HTMLPrefixes.INPUT}${modalId}" value="${inputValue}" maxlength="15" >
                         </div>
                     </div>
                     <div class="modal-footer" style="margin: 0 auto">

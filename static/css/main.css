@@ -28,7 +28,7 @@
 }
 
 body {
-    background-size: 100%;
+    background-size: auto;
     background-attachment: fixed;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.79), rgba(255, 247, 247, 0.21)),
                         url("https://orig00.deviantart.net/39cf/f/2014/070/7/b/synolog_dsm_5_default_wallpaper_by_bobi1024-d79txr6.jpg");
@@ -76,6 +76,10 @@ body {
      opacity: 1;
  }
 
+div[class='card column'], div[class*='card board'] {
+    min-width: 200px;
+}
+
 div[id$='column-1'] .card-body {
     background:#dde5f5;
 }
@@ -92,9 +96,17 @@ div[id$='column-4'] .card-body {
     background:#aabee6;
 }
 
+div[class$='card column'] {
+    min-height: 100px;
+}
+
 .jumbotron {
     width: 75%;
     margin: 0 auto;
+}
+
+.jumbotron > h1 {
+    font-size: 3em;
 }
 
 #footer {
@@ -109,6 +121,28 @@ div[id$='column-4'] .card-body {
     background: 0px;
     color: #05060B;
 }
+
+div[class*="card-options"] > i{
+    min-width: 10%;
+    width: 20%;
+    margin-left: 80%;
+    float: right; !important;
+}
+
+i {
+    min-width: 20%;
+}
+
+i:hover{
+    cursor: pointer;
+}
+
+i[id*="create-board"], i[id*="edit-board"] {
+    margin-right: 5%;
+    margin-left: 5%;
+    float: right;
+}
+
 
 /*ICON SET*/
 
